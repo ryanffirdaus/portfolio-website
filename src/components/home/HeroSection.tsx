@@ -6,8 +6,8 @@ export default function HeroSection() {
     <section className="min-h-[819px] flex flex-col justify-center py-section-gap">
       <div className="max-w-3xl space-y-6">
         {/* Availability badge */}
-        <div className="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue-muted text-primary border border-primary/10 opacity-0 animate-fade-in-up delay-100">
-          <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+        <div className="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue-muted text-primary border border-primary/20 opacity-0 animate-fade-in-up delay-100">
+          <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           <span className="font-label-md text-label-md relative z-10">
             {personal.availability}

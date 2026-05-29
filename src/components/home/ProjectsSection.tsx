@@ -9,7 +9,7 @@ export default function ProjectsSection() {
     <section className="py-section-gap scroll-mt-24" id="projects">
       <Reveal className="flex justify-between items-end mb-12">
         <div className="space-y-2">
-          <span className="font-label-md text-label-md text-primary tracking-widest uppercase">
+          <span className="font-label-md text-label-md text-primary tracking-widest uppercase text-[11px]">
             Portfolio
           </span>
           <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">

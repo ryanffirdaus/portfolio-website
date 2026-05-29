@@ -4,7 +4,10 @@ import { skills } from "@/data/skills";
 export default function SkillsSection() {
   return (
     <section className="py-section-gap scroll-mt-24" id="skills">
-      <Reveal className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+      <Reveal className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <span className="font-label-md text-label-md text-primary tracking-widest uppercase text-[11px]">
+          Expertise
+        </span>
         <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">
           Technical Arsenal
         </h2>

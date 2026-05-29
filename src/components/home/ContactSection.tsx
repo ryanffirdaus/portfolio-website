@@ -8,22 +8,32 @@ export default function ContactSection() {
 
   return (
     <section className="py-section-gap scroll-mt-24" id="contact">
-      <Reveal className="bg-charcoal-deep rounded-xl p-8 md:p-16 text-white grid md:grid-cols-2 gap-12 items-center">
+      <Reveal className="bg-charcoal-deep dark:bg-surface-container rounded-xl p-8 md:p-16 text-white dark:text-on-surface grid md:grid-cols-2 gap-12 items-center ring-1 ring-inset ring-white/5">
         {/* Info */}
         <div className="space-y-6">
           <h2 className="font-display text-display leading-tight">
             Ready to build <br />
             <span className="text-primary-fixed">{contact.headingAccent}</span>
           </h2>
-          <p className="font-body-md text-body-md text-outline-variant max-w-md">{contact.body}</p>
+          <p className="font-body-md text-body-md text-outline-variant max-w-md">
+            {contact.body}
+          </p>
           <div className="space-y-4 pt-4">
             <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-primary-fixed">mail</span>
-              <span className="font-label-md text-label-md">{contact.email}</span>
+              <span className="material-symbols-outlined text-primary-fixed">
+                mail
+              </span>
+              <span className="font-label-md text-label-md">
+                {contact.email}
+              </span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-primary-fixed">location_on</span>
-              <span className="font-label-md text-label-md">{contact.location}</span>
+              <span className="material-symbols-outlined text-primary-fixed">
+                location_on
+              </span>
+              <span className="font-label-md text-label-md">
+                {contact.location}
+              </span>
             </div>
           </div>
         </div>
@@ -35,8 +45,12 @@ export default function ContactSection() {
         >
           <div className="grid gap-4">
             {[
-              { label: "Full Name",      type: "text",  placeholder: "Jane Cooper"        },
-              { label: "Email Address",  type: "email", placeholder: "jane@company.com"   },
+              { label: "Full Name", type: "text", placeholder: "Jane Cooper" },
+              {
+                label: "Email Address",
+                type: "email",
+                placeholder: "jane@company.com",
+              },
             ].map(({ label, type, placeholder }) => (
               <div key={label} className="space-y-1">
                 <label className="font-label-md text-label-md text-outline-variant uppercase text-[10px] tracking-widest">

@@ -6,7 +6,7 @@ export default function AboutSection() {
   const { about } = personal;
 
   return (
-    <section className="py-section-gap scroll-mt-24" id="about">
+    <section className="py-section-gap scroll-mt-24 relative" id="about">
       <div className="grid md:grid-cols-2 gap-16 items-center">
         {/* Image */}
         <Reveal
@@ -24,6 +24,11 @@ export default function AboutSection() {
 
         {/* Text */}
         <Reveal className="space-y-6" delay="delay-300">
+          <div className="space-y-1 mb-2">
+            <span className="font-label-md text-label-md text-primary tracking-widest uppercase text-[11px]">
+              About Me
+            </span>
+          </div>
           <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">
             {about.heading}
           </h2>
@@ -39,7 +44,7 @@ export default function AboutSection() {
             {about.stats.map(({ value, label }) => (
               <div
                 key={label}
-                className="p-4 bg-surface-card border border-outline-variant/30 rounded"
+                className="p-4 bg-surface-card border border-outline-variant/30 rounded hover:border-primary/40 hover:-translate-y-0.5 transition-all"
               >
                 <span className="text-primary font-display text-headline-lg">
                   {value}

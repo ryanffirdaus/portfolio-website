@@ -6,7 +6,8 @@ interface RevealProps {
   children: React.ReactNode;
   className?: string;
   delay?: "delay-100" | "delay-200" | "delay-300" | "delay-400";
-  as?: keyof React.JSX.IntrinsicElements;
+  /** Renders as a <section> when true, otherwise a <div> */
+  as?: "div" | "section" | "article" | "aside";
 }
 
 export default function Reveal({
@@ -15,7 +16,7 @@ export default function Reveal({
   delay,
   as: Tag = "div",
 }: RevealProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,6 @@ export default function Reveal({
   }, []);
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag
       ref={ref}
       className={`reveal ${visible ? "active" : ""} ${delay ?? ""} ${className}`}

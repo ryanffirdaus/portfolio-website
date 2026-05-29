@@ -168,6 +168,32 @@
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ── Hero ambient radial glow ── */
+.hero-ambient {
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 40%, color-mix(in srgb, var(--color-primary) 8%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 90% 80%, color-mix(in srgb, var(--color-primary) 5%, transparent) 0%, transparent 70%);
+}
+
+/* ── Section band divider — subtle gradient fade ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-outline-variant) 30%,
+    var(--color-outline-variant) 70%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+/* ── Smooth section bg transition on page scroll ── */
+[class*="bg-surface-container-low"],
+[class*="bg-background"] {
+  transition: background-color 0.3s ease;
+}
+
 /* ─────────────────────────────────────────────────────────
    Dark mode token overrides — applied when .dark on <html>
    Based on Material Design 3 dark color scheme
