@@ -9,7 +9,10 @@ export default function AboutSection() {
     <section className="py-section-gap scroll-mt-24" id="about">
       <div className="grid md:grid-cols-2 gap-16 items-center">
         {/* Image */}
-        <Reveal className="relative aspect-square overflow-hidden rounded-lg bg-surface-variant" delay="delay-200">
+        <Reveal
+          className="relative aspect-square overflow-hidden rounded-lg bg-surface-variant"
+          delay="delay-200"
+        >
           <Image
             src={about.image.src}
             alt={about.image.alt}
@@ -21,17 +24,29 @@ export default function AboutSection() {
 
         {/* Text */}
         <Reveal className="space-y-6" delay="delay-300">
-          <h2 className="font-headline-lg text-headline-lg text-charcoal-deep">{about.heading}</h2>
+          <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">
+            {about.heading}
+          </h2>
           {about.paragraphs.map((p, i) => (
-            <p key={i} className="font-body-md text-body-md text-secondary leading-relaxed">
+            <p
+              key={i}
+              className="font-body-md text-body-md text-secondary leading-relaxed"
+            >
               {p}
             </p>
           ))}
           <div className="grid grid-cols-2 gap-4 pt-4">
             {about.stats.map(({ value, label }) => (
-              <div key={label} className="p-4 bg-white border border-outline-variant/30 rounded">
-                <span className="text-primary font-display text-headline-lg">{value}</span>
-                <p className="font-label-md text-label-md text-secondary">{label}</p>
+              <div
+                key={label}
+                className="p-4 bg-surface-card border border-outline-variant/30 rounded"
+              >
+                <span className="text-primary font-display text-headline-lg">
+                  {value}
+                </span>
+                <p className="font-label-md text-label-md text-secondary">
+                  {label}
+                </p>
               </div>
             ))}
           </div>

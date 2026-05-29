@@ -9,11 +9,13 @@ export default function HeroSection() {
         <div className="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric-blue-muted text-primary border border-primary/10 opacity-0 animate-fade-in-up delay-100">
           <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="font-label-md text-label-md relative z-10">{personal.availability}</span>
+          <span className="font-label-md text-label-md relative z-10">
+            {personal.availability}
+          </span>
         </div>
 
         {/* Headline */}
-        <h1 className="font-display text-display text-charcoal-deep leading-tight opacity-0 animate-fade-in-up delay-200">
+        <h1 className="font-display text-display text-charcoal-deep dark:text-on-surface leading-tight opacity-0 animate-fade-in-up delay-200">
           {personal.name}. <br />
           <span className="text-primary">{personal.title}</span>
         </h1>
@@ -36,7 +38,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="/#contact"
-            className="border border-outline-variant text-charcoal-deep px-8 py-4 rounded font-label-md text-label-md hover:bg-surface-variant transition-all"
+            className="border border-outline-variant text-charcoal-deep dark:text-on-surface px-8 py-4 rounded font-label-md text-label-md hover:bg-surface-variant transition-all"
           >
             Let&apos;s Talk
           </Link>

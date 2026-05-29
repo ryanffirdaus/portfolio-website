@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RevealProps {
   children: React.ReactNode;
@@ -9,21 +9,34 @@ interface RevealProps {
   as?: keyof React.JSX.IntrinsicElements;
 }
 
-export default function Reveal({ children, className = "", delay, as: Tag = "div" }: RevealProps) {
+export default function Reveal({
+  children,
+  className = "",
+  delay,
+  as: Tag = "div",
+}: RevealProps) {
   const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Immediately reveal elements already in the viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add("active");
+          setVisible(true);
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0, rootMargin: "0px" },
     );
 
     observer.observe(el);
@@ -32,7 +45,10 @@ export default function Reveal({ children, className = "", delay, as: Tag = "div
 
   return (
     // @ts-expect-error dynamic tag
-    <Tag ref={ref} className={`reveal ${delay ?? ""} ${className}`}>
+    <Tag
+      ref={ref}
+      className={`reveal ${visible ? "active" : ""} ${delay ?? ""} ${className}`}
+    >
       {children}
     </Tag>
   );

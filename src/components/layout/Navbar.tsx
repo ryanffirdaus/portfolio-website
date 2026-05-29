@@ -15,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -22,10 +23,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Sync initial state from the DOM (set by the inline script)
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    const html = document.documentElement;
+    if (next) {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
   return (
     <nav
-      className={`bg-surface/80 backdrop-blur-md top-0 sticky z-50 transition-all duration-300 ${
-        scrolled ? "shadow-sm bg-surface/95" : ""
+      className={`bg-surface/80 dark:bg-surface/90 backdrop-blur-md top-0 sticky z-50 transition-all duration-300 ${
+        scrolled ? "shadow-sm" : ""
       }`}
     >
       <div className="flex justify-between items-center w-full px-margin-mobile md:px-gutter max-w-container-max mx-auto h-16">
@@ -73,11 +92,22 @@ export default function Navbar() {
             Resume
           </Link>
 
+          {/* Theme toggle */}
+          <button
+            aria-label="Toggle dark mode"
+            onClick={toggleTheme}
+            className="text-on-surface p-2 hover:bg-surface-container rounded-full transition-colors"
+          >
+            <span className="material-symbols-outlined text-[20px]">
+              {isDark ? "light_mode" : "dark_mode"}
+            </span>
+          </button>
+
           {/* Mobile hamburger */}
           <button
             aria-label="Toggle menu"
             onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden text-on-surface p-2 hover:bg-surface-variant rounded-full transition-colors"
+            className="md:hidden text-on-surface p-2 hover:bg-surface-container rounded-full transition-colors"
           >
             <span className="material-symbols-outlined">
               {menuOpen ? "close" : "menu"}
