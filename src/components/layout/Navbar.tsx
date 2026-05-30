@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { personal } from "@/data/personal";
+import { useTheme } from "@/app/providers/ThemeProvider";
 
 const navLinks = [
   { href: "/#about", label: "About" },
@@ -15,31 +16,13 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Sync initial state from the DOM (set by the inline script)
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    const html = document.documentElement;
-    if (next) {
-      html.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      html.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
 
   return (
     <nav
@@ -53,19 +36,9 @@ export default function Navbar() {
           href="/"
           className="flex items-center hover:opacity-80 transition-opacity"
         >
-          {personal.logo.src ? (
-            <Image
-              src={personal.logo.src}
-              alt={personal.logo.alt}
-              width={80}
-              height={32}
-              className="h-8 w-auto object-contain"
-            />
-          ) : (
-            <span className="font-headline-lg text-headline-lg font-bold text-charcoal-deep dark:text-on-surface tracking-tighter">
-              RYAN
-            </span>
-          )}
+          <span className="font-headline-lg text-headline-lg font-bold text-primary dark:text-on-surface tracking-tighter">
+            RYAN
+          </span>
         </Link>
 
         {/* Desktop Nav */}
