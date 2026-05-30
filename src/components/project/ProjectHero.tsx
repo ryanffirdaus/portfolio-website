@@ -16,8 +16,12 @@ export default function ProjectHero({ project }: Props) {
             <Tag key={tag} label={tag} variant="outline" />
           ))}
         </div>
-        <h1 className="font-display text-display text-on-surface mb-6">{project.title}</h1>
-        <p className="font-body-lg text-body-lg text-secondary">{project.description}</p>
+        <h1 className="font-display text-display text-on-surface mb-6">
+          {project.title}
+        </h1>
+        <p className="font-body-lg text-body-lg text-secondary dark:text-on-surface-variant">
+          {project.description}
+        </p>
       </div>
 
       {/* Hero image */}

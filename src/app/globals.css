@@ -69,10 +69,12 @@
   --spacing-margin-mobile: 16px;
 
   /* ── Border Radius ── */
-  --radius: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
-  --radius-full: 0.75rem;
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
 
   /* ── Font Families ── */
   --font-display: var(--font-inter), Inter, sans-serif;
@@ -200,45 +202,46 @@
    ───────────────────────────────────────────────────────── */
 .dark {
   /* Backgrounds & surfaces */
-  --color-background: #111318;
-  --color-on-background: #e2e3e4;
-  --color-surface: #111318;
-  --color-surface-dim: #0d0f11;
-  --color-surface-bright: #37393b;
-  --color-surface-container-lowest: #0d0f11;
-  --color-surface-container-low: #191c1d;
-  --color-surface-container: #1e2022;
-  --color-surface-container-high: #282a2c;
-  --color-surface-container-highest: #333537;
-  --color-surface-variant: #43454e;
+  --color-background: #111317;
+  --color-on-background: #e2e2e8;
+  --color-surface: #111317;
+  --color-surface-dim: #111317;
+  --color-surface-bright: #37393e;
+  --color-surface-container-lowest: #0c0e12;
+  --color-surface-container-low: #1a1c20;
+  --color-surface-container: #1e2024;
+  --color-surface-container-high: #282a2e;
+  --color-surface-container-highest: #333539;
+  --color-surface-variant: #333539;
   --color-surface-tint: #b7c4ff;
-  --color-surface-card: #1e2022;
+  --color-surface-card: #1e2024;
 
   /* On-surface */
-  --color-on-surface: #e2e3e4;
+  --color-on-surface: #e2e2e8;
   --color-on-surface-variant: #c3c5d9;
-  --color-inverse-surface: #e2e3e4;
+  --color-inverse-surface: #e2e2e8;
   --color-inverse-on-surface: #2e3132;
 
   /* Outline */
-  --color-outline: #8d8fa1;
-  --color-outline-variant: #43454e;
+  --color-outline: #8d90a2;
+  --color-outline-variant: #434656;
 
   /* Primary — lighter tone for dark backgrounds */
   --color-primary: #b7c4ff;
-  --color-on-primary: #001452;
+  --color-on-primary: #002682;
   --color-primary-container: #0038b6;
   --color-on-primary-container: #dde1ff;
   --color-inverse-primary: #003ec7;
 
-  /* Secondary */
-  --color-secondary: #c8c6c5;
-  --color-secondary-container: #474646;
-  --color-on-secondary: #2c2c2c;
-  --color-on-secondary-container: #c8c6c5;
-  --color-secondary-fixed: #474646;
-  --color-on-secondary-fixed: #e5e2e1;
-  --color-on-secondary-fixed-variant: #c8c6c5;
+  /* Secondary — vibrant cyan per "Engineered Precision" spec */
+  --color-secondary: #bdf4ff;
+  --color-secondary-container: #00e3fd;
+  --color-on-secondary: #00363d;
+  /* on-secondary-container: practical readable value for text on dark surfaces */
+  --color-on-secondary-container: #b0b3c4;
+  --color-secondary-fixed: #9cf0ff;
+  --color-on-secondary-fixed: #001f24;
+  --color-on-secondary-fixed-variant: #004f58;
 
   /* Misc */
   --color-electric-blue-muted: #1a2547;

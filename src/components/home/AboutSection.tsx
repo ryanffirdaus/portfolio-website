@@ -35,7 +35,7 @@ export default function AboutSection() {
           {about.paragraphs.map((p, i) => (
             <p
               key={i}
-              className="font-body-md text-body-md text-secondary leading-relaxed"
+              className="font-body-md text-body-md text-secondary dark:text-on-surface-variant leading-relaxed"
             >
               {p}
             </p>

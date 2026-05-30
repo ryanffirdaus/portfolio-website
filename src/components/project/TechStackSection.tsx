@@ -29,7 +29,9 @@ export default function TechStackSection({ items }: Props) {
               <h4 className="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">
                 {title}
               </h4>
-              <p className="font-body-md text-body-md text-secondary">{description}</p>
+              <p className="font-body-md text-body-md text-secondary dark:text-on-surface-variant">
+                {description}
+              </p>
             </div>
           </Reveal>
         ))}

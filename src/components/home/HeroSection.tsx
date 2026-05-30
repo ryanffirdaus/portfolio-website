@@ -21,7 +21,7 @@ export default function HeroSection() {
         </h1>
 
         {/* Bio */}
-        <p className="font-body-lg text-body-lg text-secondary max-w-2xl opacity-0 animate-fade-in-up delay-300">
+        <p className="font-body-lg text-body-lg text-secondary dark:text-on-surface-variant max-w-2xl opacity-0 animate-fade-in-up delay-300">
           {personal.bio}
         </p>
 

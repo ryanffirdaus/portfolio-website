@@ -11,7 +11,7 @@ export default function SkillsSection() {
         <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">
           Technical Arsenal
         </h2>
-        <p className="font-body-md text-body-md text-secondary">
+        <p className="font-body-md text-body-md text-secondary dark:text-on-surface-variant">
           A curated stack of technologies I use to build performant and
           resilient digital products.
         </p>

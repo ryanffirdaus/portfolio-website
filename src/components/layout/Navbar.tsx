@@ -62,7 +62,7 @@ export default function Navbar() {
               className="h-8 w-auto object-contain"
             />
           ) : (
-            <span className="font-headline-lg text-headline-lg font-bold text-charcoal-deep tracking-tighter">
+            <span className="font-headline-lg text-headline-lg font-bold text-charcoal-deep dark:text-on-surface tracking-tighter">
               RYAN
             </span>
           )}

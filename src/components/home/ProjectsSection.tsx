@@ -23,7 +23,7 @@ export default function ProjectsSection() {
           ({ slug, title, tags, description, image }, idx) => (
             <Reveal
               key={slug}
-              className="project-card group bg-surface-card border border-outline-variant/30 rounded overflow-hidden hover:border-primary/50 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300"
+              className="project-card group bg-surface-card border border-outline-variant/30 rounded-lg overflow-hidden hover:border-primary/50 hover:shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 transition-all duration-300"
               delay={
                 idx === 0 ? "delay-100" : idx === 1 ? "delay-200" : "delay-300"
               }

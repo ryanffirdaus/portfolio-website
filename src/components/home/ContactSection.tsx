@@ -15,7 +15,7 @@ export default function ContactSection() {
             Ready to build <br />
             <span className="text-primary-fixed">{contact.headingAccent}</span>
           </h2>
-          <p className="font-body-md text-body-md text-outline-variant max-w-md">
+          <p className="font-body-md text-body-md text-outline-variant dark:text-on-surface-variant max-w-md">
             {contact.body}
           </p>
           <div className="space-y-4 pt-4">
