@@ -4,62 +4,62 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* ── Colors ── */
-  --color-primary: #003ec7;
-  --color-primary-container: #0052ff;
-  --color-primary-fixed: #dde1ff;
-  --color-primary-fixed-dim: #b7c4ff;
+  /* ── Colors — Light mode (Emerald Forest) ── */
+  --color-primary: #167a3e;
+  --color-primary-container: #b7f5d0;
+  --color-primary-fixed: #b7f5d0;
+  --color-primary-fixed-dim: #7ec89a;
   --color-on-primary: #ffffff;
-  --color-on-primary-container: #dfe3ff;
-  --color-on-primary-fixed: #001452;
-  --color-on-primary-fixed-variant: #0038b6;
-  --color-inverse-primary: #b7c4ff;
+  --color-on-primary-container: #00200d;
+  --color-on-primary-fixed: #00200d;
+  --color-on-primary-fixed-variant: #0d4d26;
+  --color-inverse-primary: #2ecc71;
 
-  --color-secondary: #5f5e5e;
-  --color-secondary-container: #e5e2e1;
-  --color-secondary-fixed: #e5e2e1;
-  --color-secondary-fixed-dim: #c8c6c5;
+  --color-secondary: #4a6e53;
+  --color-secondary-container: #cce8d4;
+  --color-secondary-fixed: #cce8d4;
+  --color-secondary-fixed-dim: #a8c8b2;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #656464;
-  --color-on-secondary-fixed: #1c1b1b;
-  --color-on-secondary-fixed-variant: #474646;
+  --color-on-secondary-container: #0a2d1a;
+  --color-on-secondary-fixed: #0a2d1a;
+  --color-on-secondary-fixed-variant: #304d3a;
 
-  --color-tertiary: #474e5b;
-  --color-tertiary-container: #5f6674;
-  --color-tertiary-fixed: #dce2f3;
-  --color-tertiary-fixed-dim: #c0c7d6;
+  --color-tertiary: #3d5a5e;
+  --color-tertiary-container: #c1eaef;
+  --color-tertiary-fixed: #c1eaef;
+  --color-tertiary-fixed-dim: #a5ced3;
   --color-on-tertiary: #ffffff;
-  --color-on-tertiary-container: #dee4f5;
-  --color-on-tertiary-fixed: #151c27;
-  --color-on-tertiary-fixed-variant: #404754;
+  --color-on-tertiary-container: #001f23;
+  --color-on-tertiary-fixed: #001f23;
+  --color-on-tertiary-fixed-variant: #1f4245;
 
   --color-error: #ba1a1a;
   --color-error-container: #ffdad6;
   --color-on-error: #ffffff;
   --color-on-error-container: #93000a;
 
-  --color-background: #f8f9fa;
-  --color-on-background: #191c1d;
-  --color-surface: #f8f9fa;
-  --color-surface-dim: #d9dadb;
-  --color-surface-bright: #f8f9fa;
+  --color-background: #f2f9f4;
+  --color-on-background: #0d1a10;
+  --color-surface: #f2f9f4;
+  --color-surface-dim: #daeade;
+  --color-surface-bright: #f2f9f4;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f3f4f5;
-  --color-surface-container: #edeeef;
-  --color-surface-container-high: #e7e8e9;
-  --color-surface-container-highest: #e1e3e4;
-  --color-surface-variant: #e1e3e4;
-  --color-surface-tint: #004ced;
+  --color-surface-container-low: #edf6ef;
+  --color-surface-container: #e7f0e9;
+  --color-surface-container-high: #e1eae3;
+  --color-surface-container-highest: #dbe4dd;
+  --color-surface-variant: #dbe4dd;
+  --color-surface-tint: #167a3e;
   --color-surface-card: #ffffff;
-  --color-on-surface: #191c1d;
-  --color-on-surface-variant: #434656;
-  --color-inverse-surface: #2e3132;
-  --color-inverse-on-surface: #f0f1f2;
+  --color-on-surface: #0d1a10;
+  --color-on-surface-variant: #3d5240;
+  --color-inverse-surface: #1e2e21;
+  --color-inverse-on-surface: #edf6ef;
 
-  --color-outline: #737688;
-  --color-outline-variant: #c3c5d9;
-  --color-electric-blue-muted: #ebf2ff;
-  --color-charcoal-deep: #111827;
+  --color-outline: #6a8a6e;
+  --color-outline-variant: #b8d4bc;
+  --color-electric-blue-muted: #e8f5ed;
+  --color-charcoal-deep: #0d1a10;
 
   /* ── Spacing ── */
   --spacing-section-gap: 80px;
@@ -201,48 +201,48 @@
    Based on Material Design 3 dark color scheme
    ───────────────────────────────────────────────────────── */
 .dark {
-  /* Backgrounds & surfaces */
-  --color-background: #111317;
-  --color-on-background: #e2e2e8;
-  --color-surface: #111317;
-  --color-surface-dim: #111317;
-  --color-surface-bright: #37393e;
-  --color-surface-container-lowest: #0c0e12;
-  --color-surface-container-low: #1a1c20;
-  --color-surface-container: #1e2024;
-  --color-surface-container-high: #282a2e;
-  --color-surface-container-highest: #333539;
-  --color-surface-variant: #333539;
-  --color-surface-tint: #b7c4ff;
-  --color-surface-card: #1e2024;
+  /* Backgrounds & surfaces — Obsidian Forest */
+  --color-background: #0a0c0a;
+  --color-on-background: #f8faf9;
+  --color-surface: #0a0c0a;
+  --color-surface-dim: #080a08;
+  --color-surface-bright: #1e2620;
+  --color-surface-container-lowest: #060806;
+  --color-surface-container-low: #0f1510;
+  --color-surface-container: #161d17;
+  --color-surface-container-high: #1e2620;
+  --color-surface-container-highest: #252e27;
+  --color-surface-variant: #252e27;
+  --color-surface-tint: #2ecc71;
+  --color-surface-card: #161d17;
 
   /* On-surface */
-  --color-on-surface: #e2e2e8;
-  --color-on-surface-variant: #c3c5d9;
-  --color-inverse-surface: #e2e2e8;
-  --color-inverse-on-surface: #2e3132;
+  --color-on-surface: #f8faf9;
+  --color-on-surface-variant: #b0c4b4;
+  --color-inverse-surface: #f8faf9;
+  --color-inverse-on-surface: #1e2620;
 
   /* Outline */
-  --color-outline: #8d90a2;
-  --color-outline-variant: #434656;
+  --color-outline: #4a5e4d;
+  --color-outline-variant: #333b34;
 
-  /* Primary — lighter tone for dark backgrounds */
-  --color-primary: #b7c4ff;
-  --color-on-primary: #002682;
-  --color-primary-container: #0038b6;
-  --color-on-primary-container: #dde1ff;
-  --color-inverse-primary: #003ec7;
+  /* Primary — Vibrant Emerald */
+  --color-primary: #2ecc71;
+  --color-on-primary: #00200d;
+  --color-primary-container: #0d5c33;
+  --color-on-primary-container: #b7f5d0;
+  --color-inverse-primary: #167a3e;
 
-  /* Secondary — vibrant cyan per "Engineered Precision" spec */
-  --color-secondary: #bdf4ff;
-  --color-secondary-container: #00e3fd;
-  --color-on-secondary: #00363d;
-  /* on-secondary-container: practical readable value for text on dark surfaces */
-  --color-on-secondary-container: #b0b3c4;
-  --color-secondary-fixed: #9cf0ff;
-  --color-on-secondary-fixed: #001f24;
-  --color-on-secondary-fixed-variant: #004f58;
+  /* Secondary — Muted Green */
+  --color-secondary: #7ec89a;
+  --color-secondary-container: #1e3d28;
+  --color-on-secondary: #0a2d1a;
+  --color-on-secondary-container: #a8e8be;
+  --color-secondary-fixed: #a8e8be;
+  --color-on-secondary-fixed: #00200d;
+  --color-on-secondary-fixed-variant: #1e3d28;
 
   /* Misc */
-  --color-electric-blue-muted: #1a2547;
+  --color-electric-blue-muted: #0f2918;
+  --color-charcoal-deep: #0a0c0a;
 }
