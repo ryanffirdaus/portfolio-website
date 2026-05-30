@@ -7,9 +7,11 @@ import { personal } from "@/data/personal";
 import { useTheme } from "@/app/providers/ThemeProvider";
 
 const navLinks = [
-  { href: "/#about", label: "About" },
+  { href: "/", label: "Home" },
   { href: "/#projects", label: "Projects" },
   { href: "/#skills", label: "Skills" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#education", label: "Education" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -58,13 +60,6 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-4">
-          <Link
-            href={personal.resumeHref}
-            className="hidden md:inline-flex bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-md hover:shadow-lg"
-          >
-            Resume
-          </Link>
-
           {/* Theme toggle */}
           <button
             aria-label="Toggle dark mode"
@@ -102,12 +97,6 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <Link
-            href={personal.resumeHref}
-            className="block bg-primary text-on-primary text-center font-label-md text-label-md px-6 py-2 rounded mt-2"
-          >
-            Resume
-          </Link>
         </div>
       )}
     </nav>

@@ -28,6 +28,25 @@ export interface TechStackItem {
   description: string;
 }
 
+export interface ExperienceItem {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  description: string;
+  highlights: string[];
+  logo?: string;
+}
+
+export interface EducationItem {
+  institution: string;
+  degree: string;
+  field: string;
+  period: string;
+  location: string;
+  description?: string;
+}
+
 export interface GalleryImage {
   src: string;
   alt: string;
@@ -51,6 +70,7 @@ export interface ProjectDetail {
 export interface Skill {
   name: string;
   category: string;
+  logo?: string;
 }
 
 export interface Stat {
