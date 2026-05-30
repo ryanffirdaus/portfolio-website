@@ -6,11 +6,6 @@ export default function Footer() {
   return (
     <footer className="bg-surface-container-low border-t border-outline-variant/30">
       <div className="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-gutter max-w-container-max mx-auto min-h-[80px] gap-4 py-6">
-        {/* Brand */}
-        <div className="font-headline-lg text-headline-lg font-bold text-primary hover:opacity-80 transition-opacity cursor-pointer">
-          RYAN
-        </div>
-
         {/* Copyright */}
         <p className="font-label-md text-label-md text-on-surface-variant text-center">
           {personal.copyright}
