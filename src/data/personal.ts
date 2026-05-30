@@ -1,10 +1,10 @@
-import type { Stat } from "@/types";
+import type { Stat, ExperienceItem, EducationItem } from "@/types";
 
 export const personal = {
   name: "Ryan Faatih Firdaus",
   title: "Software Engineer",
   location: "Jakarta, Indonesia",
-  bio: "Software Engineer delivering high-impact back-end and IoT solutions. Migrated legacy systems to React/Laravel, cutting CPU load by 98%.",
+  bio: "I build inventory management systems, workflow automation tools, SaaS applications, payment integrations, and real-time monitoring platforms that help businesses streamline operations and scale efficiently.",
 
   about: {
     heading: "Technical Expertise",
@@ -23,9 +23,9 @@ export const personal = {
   },
 
   contact: {
-    heading: "Ready to build the future?",
-    headingAccent: "the future?",
-    body: "Currently accepting select freelance projects and full-time technical leadership roles. Let's discuss your next breakthrough.",
+    heading: "Need a",
+    headingAccent: " Custom Software Solution?",
+    body: "I help businesses build scalable web applications, business systems, API integrations, and real-time monitoring platforms. If you have a project in mind, let's talk.",
     email: "ryanfaatih.firdaus@gmail.com",
     location: "Jakarta, Indonesia",
   },
@@ -38,6 +38,53 @@ export const personal = {
     sourceCode: "https://github.com/ryanffirdaus",
   },
 
-  resumeHref: "https://drive.google.com/file/d/1JG4pEsGHu3LWBQMoGxtPzLXKyrYC_fGf/view?usp=sharing",
+  resumeHref: "https://drive.google.com/file/d/18uP_qgaPib3xd4HycIHB91V_AT3Klbno/view?usp=sharing",
   copyright: "© 2026 Ryan Faatih Firdaus. All rights reserved.",
 } as const;
+
+export const experience: ExperienceItem[] = [
+  {
+    company: "PT Quanta Teknik Gemilang",
+    role: "Software Engineer",
+    period: "Jan 2025 — Present",
+    location: "Indonesia",
+    logo: "/images/companies/smartcool_logo.webp",
+    description:
+      "Led full-stack modernization of a legacy IoT management platform and architected scalable back-end systems supporting 500+ active users.",
+    highlights: [
+      "Migrated legacy PHP-based IoT system to React and Laravel, reducing CPU load by ~98%",
+      "Optimized database queries and implemented Redis caching, reducing memory usage by ~75%",
+      "Architected REST APIs, database schema, service layers, and application structure using Laravel and Node.js",
+      "Developed a real-time IoT monitoring system ingesting live sensor data from 600+ connected devices and processing live telemetry across 5+ sensor metrics",
+      "Built 7 Node.js microservices for data processing pipelines and background services",
+      "Developed and maintained React front-end with real-time dashboard components visualizing 5+ IoT metrics",
+      "Managed server infrastructure with Docker and Linux, streamlining deployments via containerization and automated pipelines",
+    ],
+  },
+  {
+    company: "PT Origin Wiracipta Lestari",
+    role: "Back-End Web Developer Intern",
+    period: "Jan 2024 — Mar 2024",
+    location: "Indonesia",
+    logo: "/images/companies/owl_logo.webp",
+    description:
+      "Built a full-featured Inventory Management System from scratch using PHP, covering the end-to-end product lifecycle across 50+ SKUs.",
+    highlights: [
+      "Implemented stock management module tracking real-time inventory with full incoming/outgoing transaction history",
+      "Developed a production module managing manufacturing workflow from raw materials to finished goods",
+      "Built a maintenance and return module with step-by-step progress tracking and personnel traceability across 50+ records",
+      "Designed and optimized the database schema to ensure data integrity and query performance across all modules",
+    ],
+  },
+];
+
+export const education: EducationItem[] = [
+  {
+    institution: "Universitas Islam Negeri Syarif Hidayatullah Jakarta",
+    degree: "Bachelor of Information Systems",
+    field: "Information Systems",
+    period: "2021 — 2025",
+    location: "Jakarta, Indonesia",
+    description: "GPA: 3.57 / 4.00",
+  },
+];
