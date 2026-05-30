@@ -3,13 +3,8 @@ import type { Stat } from "@/types";
 export const personal = {
   name: "Ryan Faatih Firdaus",
   title: "Software Engineer",
-  availability: "Available for opportunities",
+  location: "Jakarta, Indonesia",
   bio: "Software Engineer delivering high-impact back-end and IoT solutions. Migrated legacy systems to React/Laravel, cutting CPU load by 98%.",
-
-  logo: {
-    src: "https://lh3.googleusercontent.com/aida/ADBb0uhFa2VDXS_xXS3zEkVyFW2eY2ehHxHUi2v0CKFCB6mpakVs8oWm6xCcsl51QLdJ63ERaygmmzXTwGYCP3NS6VoJWDNFUE5QLenD6eGa_wtDoWqAVKViTI9lrLYDsIweFroEmbLqjWTb60y5FHEWR5BIXVaxysdnsfeckjq34TMWyzI-bNHZYnGGT7Ct_5D3tH4wlfiDNnhT_hSOkeCHQXYDD-XZbRySCEoP1wGTjHrXVK4Ut8K7bBMzz4Y",
-    alt: "Ryan Faatih Logo",
-  },
 
   about: {
     heading: "Technical Expertise",
@@ -31,16 +26,18 @@ export const personal = {
     heading: "Ready to build the future?",
     headingAccent: "the future?",
     body: "Currently accepting select freelance projects and full-time technical leadership roles. Let's discuss your next breakthrough.",
-    email: "hello@johndoe.engineering",
-    location: "London, United Kingdom",
+    email: "ryanfaatih.firdaus@gmail.com",
+    location: "Jakarta, Indonesia",
   },
 
   social: {
-    linkedin: "#",
-    github: "#",
-    sourceCode: "#",
+    linkedin: "https://linkedin.com/in/ryanffirdaus",
+    github: "https://github.com/ryanffirdaus",
+    instagram: "https://instagram.com/ryanffirdaus",
+    email: "mailto:ryanfaatih.firdaus@gmail.com",
+    sourceCode: "https://github.com/ryanffirdaus",
   },
 
-  resumeHref: "#",
-  copyright: "© 2024 Software Engineer Portfolio. Built with technical precision.",
+  resumeHref: "https://drive.google.com/file/d/1JG4pEsGHu3LWBQMoGxtPzLXKyrYC_fGf/view?usp=sharing",
+  copyright: "© 2026 Ryan Faatih Firdaus. All rights reserved.",
 } as const;
