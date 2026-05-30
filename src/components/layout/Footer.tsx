@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { personal } from "@/data/personal";
-
-const socialLinks = [
-  { href: personal.social.linkedin, label: "LinkedIn" },
-  { href: personal.social.github, label: "GitHub" },
-  { href: personal.social.sourceCode, label: "Source Code" },
-];
+import { socialLinks } from "@/data/social";
 
 export default function Footer() {
   return (
@@ -17,20 +12,24 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="font-label-md text-label-md text-on-secondary-container text-center md:text-left">
+        <p className="font-label-md text-label-md text-on-surface-variant text-center">
           {personal.copyright}
         </p>
 
-        {/* Social links */}
-        <ul className="flex items-center space-x-6">
-          {socialLinks.map(({ href, label }) => (
+        {/* Social icon links */}
+        <ul className="flex items-center gap-3">
+          {socialLinks.map(({ href, label, icon }) => (
             <li key={label}>
               <Link
                 href={href}
-                className="font-label-md text-label-md text-on-secondary-container hover:text-primary transition-colors relative group"
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel={
+                  href.startsWith("mailto") ? undefined : "noopener noreferrer"
+                }
+                aria-label={label}
+                className="flex items-center justify-center w-9 h-9 rounded-lg border border-outline-variant/50 text-on-surface-variant hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
               >
-                {label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full" />
+                {icon}
               </Link>
             </li>
           ))}
