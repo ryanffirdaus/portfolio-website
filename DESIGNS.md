@@ -1,5 +1,147 @@
+# Design System — Ryan Faatih Firdaus Portfolio
+
+## Overview
+
+This portfolio uses an **Emerald Forest** (light) / **Obsidian Forest** (dark) design system — a clean, minimal aesthetic inspired by natural depth and technical precision. Dark mode is the default.
+
 ---
-name: Technical Portfolio
+
+## Color Palette
+
+### Light Mode — Emerald Forest
+
+| Token | Value | Usage |
+|---|---|---|
+| `--color-primary` | `#167a3e` | CTAs, links, active states, accents |
+| `--color-background` | `#f2f9f4` | Page background |
+| `--color-surface` | `#f2f9f4` | Base surface |
+| `--color-surface-card` | `#ffffff` | Cards and elevated surfaces |
+| `--color-surface-container-low` | `#edf6ef` | Alternating section backgrounds |
+| `--color-on-surface` | `#0d1a10` | Primary text |
+| `--color-on-surface-variant` | `#3d5240` | Secondary/body text |
+| `--color-outline` | `#6a8a6e` | Borders, dividers |
+| `--color-outline-variant` | `#b8d4bc` | Subtle borders |
+| `--color-charcoal-deep` | `#0d1a10` | Headings |
+
+### Dark Mode — Obsidian Forest
+
+| Token | Value | Usage |
+|---|---|---|
+| `--color-primary` | `#2ecc71` | CTAs, links, active states, accents |
+| `--color-background` | `#0a0c0a` | Page background |
+| `--color-surface` | `#0f1410` | Base surface |
+| `--color-surface-card` | `#161d17` | Cards and elevated surfaces |
+| `--color-surface-container-low` | `#131913` | Alternating section backgrounds |
+| `--color-on-surface` | `#f8faf9` | Primary text |
+| `--color-on-surface-variant` | `#a8bfaa` | Secondary/body text |
+| `--color-outline` | `#4a6b4e` | Borders, dividers |
+| `--color-outline-variant` | `#333b34` | Subtle borders |
+
+---
+
+## Typography
+
+| Scale | Font | Size | Weight | Line Height | Letter Spacing |
+|---|---|---|---|---|---|
+| `display` | Inter | 48px | 700 | 1.1 | −0.02em |
+| `headline-lg` | Inter | 32px | 600 | 1.2 | — |
+| `headline-lg-mobile` | Inter | 24px | 600 | 1.2 | — |
+| `body-lg` | Inter | 18px | 400 | 1.6 | — |
+| `body-md` | Inter | 16px | 400 | 1.5 | — |
+| `label-md` | JetBrains Mono | 14px | 500 | 1.4 | 0.05em |
+
+Two fonts are loaded via `next/font`:
+- **Inter** — all prose, headings, and UI text
+- **JetBrains Mono** — labels, category tags, metadata (reinforces Software Engineer identity)
+
+---
+
+## Spacing
+
+| Token | Value | Usage |
+|---|---|---|
+| `--spacing-base` | `8px` | Base unit |
+| `--spacing-section-gap` | `80px` | Vertical section padding |
+| `--spacing-gutter` | `24px` | Desktop horizontal padding |
+| `--spacing-margin-mobile` | `16px` | Mobile horizontal padding |
+| `--spacing-container-max` | `1120px` | Max content width |
+
+---
+
+## Border Radius
+
+| Token | Value |
+|---|---|
+| `--radius-sm` | `0.125rem` |
+| `--radius` | `0.25rem` — buttons, inputs |
+| `--radius-md` | `0.375rem` |
+| `--radius-lg` | `0.5rem` — project cards |
+| `--radius-xl` | `0.75rem` |
+| `--radius-full` | `9999px` — pills, badges |
+
+---
+
+## Elevation & Depth
+
+- **Cards:** `1px` border in `outline-variant/20`, soft diffused shadow on hover only
+- **Navbar:** backdrop blur with transparency (glassmorphism)
+- **Section separation:** alternating `background` ↔ `surface-container-low` bands; no heavy dividers
+- **Hero:** dual radial-gradient ambient glow using `primary` color at 5–8% opacity
+
+---
+
+## Animations
+
+| Class | Behavior |
+|---|---|
+| `.reveal` | Fade + slide up on scroll into viewport (`IntersectionObserver`, threshold 0) |
+| `.delay-100/200/300/400` | Staggered animation delays |
+| `.animate-fade-in-up` | Hero content entrance animation |
+| `.animate-shimmer` | Loading shimmer |
+| `.project-image` | Grayscale by default, color on card hover + scale 1.05 |
+| `.hero-ambient` | Radial glow background overlay |
+
+---
+
+## Dark Mode
+
+- Default: `dark` class on `<html>` (set at build time)
+- Anti-flash: inline `<script>` in `<head>` removes `dark` class if `localStorage.theme === 'light'`
+- Toggle: `ThemeProvider` context (`src/app/providers/ThemeProvider.tsx`) syncs DOM + `localStorage`
+- Tailwind variant: `@custom-variant dark (&:where(.dark, .dark *))`
+
+---
+
+## Component Patterns
+
+### Buttons
+- **Primary:** filled `bg-primary text-on-primary`, hover scale 1.02
+- **Secondary:** `border border-primary text-primary` ghost style
+- **Icon buttons:** `w-9 h-9 rounded-lg border border-outline-variant/50 hover:border-primary hover:text-primary`
+
+### Cards
+- `bg-surface-card border border-outline-variant/20 rounded-lg`
+- Hover: `border-primary/40`, lift (`-translate-y-1`), soft shadow
+
+### Tags / Chips
+- JetBrains Mono `label-md`, `bg-surface-container`, `rounded-full`
+- No border; secondary to main card content
+
+### Section Headings
+- Eyebrow: `text-primary uppercase tracking-widest text-[11px]` JetBrains Mono
+- Title: `headline-lg` Inter
+- Optional subtitle: `body-md text-on-surface-variant`
+
+### Navbar
+- Sticky top, backdrop blur
+- 6 links: Home, Projects, Skills, Experience, Education, Contact
+- Dark mode toggle button (right side)
+- Mobile: hamburger menu
+
+### Icons
+- **Material Symbols Outlined** loaded via Google Fonts `<link>` in layout head
+- **Brand logos:** Simple Icons CDN (`https://cdn.simpleicons.org/{name}`) for skill chips
+
 colors:
   surface: '#f8f9fa'
   surface-dim: '#d9dadb'
