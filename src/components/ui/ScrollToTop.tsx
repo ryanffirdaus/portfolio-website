@@ -4,14 +4,23 @@ import { useState, useEffect } from "react";
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
+    const onOpen = () => setLightboxOpen(true);
+    const onClose = () => setLightboxOpen(false);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("lightbox-open", onOpen);
+    window.addEventListener("lightbox-close", onClose);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("lightbox-open", onOpen);
+      window.removeEventListener("lightbox-close", onClose);
+    };
   }, []);
 
-  if (!visible) return null;
+  if (!visible || lightboxOpen) return null;
 
   return (
     <button
