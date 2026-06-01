@@ -6,13 +6,13 @@ import type { ProjectSummary, ProjectDetail } from "@/types";
 export const projectSummaries: ProjectSummary[] = [
   {
     slug: "smartcool",
-    title: "Real-time IoT Platform",
-    tags: ["Node.js", "MQTT"],
+    title: "Smartcool Monitoring",
+    tags: ["Laravel", "Node.js", "React", "MQTT", "Docker", "Redis"],
     description:
-      "Scalable infrastructure serving 500+ concurrent users with sub-50ms latency for device communication.",
+      "Full-stack IoT monitoring platform supporting 600+ connected devices and 500+ active users, rebuilt from a legacy PHP system with 98% CPU load reduction.",
     image: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDhWgPl4N6CYkbIgMWBdRPD8zTuI9Iu9rG_mHDGgnrFR-TC2p4fRuo6XTTHlBMUbfP8d_zZQ0-nxX6wErJ3wkxDhR69PGCW5O0ouozkApprd0sxZUZl-Xd9CHmZQag2RHxlYRcczr9TJIfx10ebaiB7c4ehsD-tW7mc0ZRILC7onDy_lkfnSPTRRD61hunVUucPyLGw_Lq-3n1FPuFnjxdxqFjvktFJXRs1UjS8VMtrJAAz_R-dFofAXdMLISNOLW0qxm5vIepf8Kk",
-      alt: "IoT Platform",
+      src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
+      alt: "Smartcool Monitoring",
     },
   },
   {
@@ -45,80 +45,117 @@ export const projectSummaries: ProjectSummary[] = [
 const projectDetails: Record<string, ProjectDetail> = {
   smartcool: {
     slug: "smartcool",
-    title: "Real-time IoT Platform",
-    tags: ["Node.js", "MQTT", "Docker"],
+    title: "Smartcool Monitoring",
+    tags: ["Laravel", "Node.js", "React", "MQTT", "Docker", "Redis"],
     description:
-      "A scalable infrastructure designed to handle high-frequency telemetry data, reliably serving over 500+ concurrent edge devices while maintaining extreme efficiency.",
+      "A full-stack IoT monitoring platform migrated from a legacy PHP dashboard to a modern React and Laravel architecture. The system supports 600+ connected devices across 5+ sensor metrics in real time, serves 500+ active users, and is powered by 7 Node.js microservices handling data pipelines, background jobs, and third-party integrations.",
     heroImage: {
-      src: "https://lh3.googleusercontent.com/aida/ADBb0uj2Qn6NNutS7EVhRU2hxeOEk1DK0ZmGGLEImJnb3pMMuK1dMNqvWYCpV-K8nW4d3-y5Hd4mNqBQ_JqBBDbRN_Vtd_8uQjK4Ea0Zm-z1PGI8MJv5Z1gUDJR-QJwRi047m1GeaS2vLUnL_GSfbCTnfdcknUBKN6IQB-qObstnCBOsRBq3Tem-9K92QMj_ZYk1O7iJLlbuTD5uuxJd3s0UwTu6iLqECY7D-W9St6BDzr1hJuHIl-YNpSRMdz8",
-      alt: "Cloud Infrastructure Architecture",
+      src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
+      alt: "Smartcool Monitoring Dashboard",
     },
     gallery: [
       {
-        src: "https://lh3.googleusercontent.com/aida/ADBb0uj1lKeWTtjyfG7cRp7gnWbnsot1ho2JEu49-ZTIgsEFL3t6G-ckbBhdPNtezFx20-PnztXIe_5d2Up7eQNSJK8VTvoLPifLvMLLU918K1lT3xF4JpxsSwF6yVENBUW6nHSA8O_LZCcxh1vUOPAv-_ZNatfv5Y_mshJWauwzpJfT60P6-MqQ5EWIj0LgCmT_9GY2pBW568Z0NgAEakPBbo3bvVbq-pk4GHo1w5HRlFR7H2uVoR7-cuRCX6s",
-        alt: "Edge Computing Hardware",
+        src: "/images/projects/smartcool-monitoring/homepage_monitoring_1.webp",
+        alt: "Homepage Monitoring",
       },
       {
-        src: "https://lh3.googleusercontent.com/aida/ADBb0uja6pdvABc3XuXlpFsAKi_ykyYdscwZDZozk355mcbEvORK11SZl8yIB9C9QZMnn7GQnrspTSLcQIa5R-L_JU8BwQwwJn2_15exiK-_bQZeqxKjOIA6WsUBzd2tfxuej3xluBB-dT4nCcxIn135vw3fVdPpUt5QgVmwbTClsDvM2R2zEQzmVcLLe4IyxPQ40qAflisxjfrv8kdUIzNH_o7VDPqC8MDcLEvNuIX0A9WJJzlmQq_T4PBtCl0",
-        alt: "Real-time Metrics Dashboard",
+        src: "/images/projects/smartcool-monitoring/homepage_monitoring_2.webp",
+        alt: "Homepage Monitoring Detail",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/device_monitoring_1.webp",
+        alt: "Device Monitoring",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/device_monitoring_2.webp",
+        alt: "Device Monitoring Detail",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/summary.webp",
+        alt: "Summary",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/report_energy.webp",
+        alt: "Energy Report",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/work_order_schedule.webp",
+        alt: "Work Order Schedule",
+      },
+      {
+        src: "/images/projects/smartcool-monitoring/work_order_tracker.webp",
+        alt: "Work Order Tracker",
       },
     ],
     challenge: [
-      "The core requirement was to build a system capable of achieving sub-50ms latency for device-to-cloud communication. Traditional HTTP polling was too heavy and slow for the volume of telemetry data required. The business impact relied heavily on real-time responsiveness for critical monitoring alerts.",
-      "We needed a lightweight, persistent connection protocol and a backend architecture that could process streams of data without bottlenecking during sudden spikes in device activity.",
+      "The original system was a legacy PHP-based IoT dashboard that had grown unmaintainable over time. It suffered from high CPU utilization, slow database queries, and a tightly coupled architecture that made adding new features risky. The business needed a stable platform capable of scaling to hundreds of connected devices and users simultaneously.",
+      "We migrated the front end to React and the back end to Laravel, redesigned the database schema, and introduced Redis caching to address memory and query bottlenecks. Separately, a real-time telemetry layer was built using 7 dedicated Node.js microservices, each responsible for a distinct concern — from data ingestion and processing pipelines to external system integrations and payment handling via Midtrans.",
     ],
     architecture: {
       cards: [
         {
-          icon: "router",
+          icon: "devices",
           iconFill: true,
           iconAnimation: "scale",
-          title: "Edge Layer",
+          title: "IoT Device Layer",
           description:
-            "Devices connect via MQTT over TLS. We implemented a custom keep-alive mechanism to ensure connection stability even in low-bandwidth environments.",
+            "600+ connected devices stream live telemetry across 5+ sensor metrics. Node.js microservices handle ingestion, processing pipelines, and real-time delivery to the front end.",
         },
         {
-          icon: "sync_alt",
+          icon: "layers",
+          iconFill: true,
+          iconAnimation: "scale",
+          title: "Laravel Back End",
+          description:
+            "REST APIs, third-party integrations, database schema design, and service layers are built in Laravel. Redis caching reduces memory usage by ~75% and accelerates frequent queries.",
+        },
+        {
+          icon: "deployed_code",
           iconFill: true,
           iconAnimation: "rotate",
-          title: "Message Broker",
+          title: "Infrastructure",
           description:
-            "A highly available Mosquitto cluster handles topic routing and message queuing, decoupling device ingress from the backend processing services.",
-        },
-        {
-          icon: "database",
-          iconFill: true,
-          iconAnimation: "scale",
-          title: "Data Persistence",
-          description:
-            "Time-series data is offloaded to a specialized database optimized for high-write throughput, allowing for efficient historical querying and visualization.",
+            "Containerized with Docker and deployed on Linux servers via automated pipelines, ensuring consistent environments across development and production.",
         },
       ],
     },
     keyResults: [
-      { target: 500, suffix: "+", label: "Concurrent Devices" },
-      { prefix: "<", target: 50, suffix: "ms", label: "Avg Latency" },
-      { target: 99.9, isDecimal: true, suffix: "%", label: "Uptime" },
-      { target: 98, suffix: "%", label: "CPU Efficiency" },
+      { target: 600, suffix: "+", label: "Connected Devices" },
+      { target: 500, suffix: "+", label: "Active Users" },
+      { target: 98, suffix: "%", label: "CPU Load Reduction" },
+      { target: 75, suffix: "%", label: "Memory Usage Reduction" },
+      { target: 7, label: "Node.js Microservices" },
     ],
     techStack: [
       {
         number: "01",
-        title: "Node.js",
+        title: "Laravel",
         description:
-          "Used for the core backend microservices. Its event-driven, non-blocking I/O model proved ideal for handling thousands of simultaneous connections without thread overhead.",
+          "Powers the core back-end: REST APIs, service layers, database schema design, third-party API integrations, and the Midtrans payment gateway. Chosen for its expressive ORM, robust structure, and rapid development cycle.",
       },
       {
         number: "02",
-        title: "MQTT",
+        title: "Node.js",
         description:
-          "Chosen for its lightweight header and pub/sub architecture, drastically reducing bandwidth consumption compared to REST APIs over HTTP.",
+          "Seven dedicated microservices built with Node.js handle real-time telemetry ingestion, data processing pipelines, background jobs, and integrations with external systems.",
       },
       {
         number: "03",
+        title: "React",
+        description:
+          "The front end was fully migrated from legacy PHP views to React, enabling a component-driven UI with live data updates and a significantly improved user experience.",
+      },
+      {
+        number: "04",
+        title: "Redis",
+        description:
+          "Introduced as a caching layer for frequent database reads, reducing memory usage by approximately 75% and improving response times across high-traffic endpoints.",
+      },
+      {
+        number: "05",
         title: "Docker",
         description:
-          "Containerization ensured environment consistency across development, staging, and production, facilitating rapid deployments and horizontal scaling.",
+          "All services are containerized and deployed on Linux servers through automated pipelines, ensuring environment parity and enabling reliable horizontal scaling.",
       },
     ],
   },

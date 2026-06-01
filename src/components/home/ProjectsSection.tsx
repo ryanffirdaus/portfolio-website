@@ -28,7 +28,10 @@ export default function ProjectsSection() {
                 idx === 0 ? "delay-100" : idx === 1 ? "delay-200" : "delay-300"
               }
             >
-              <div className="aspect-video overflow-hidden bg-surface-dim">
+              <Link
+                href={`/projects/${slug}`}
+                className="aspect-video overflow-hidden bg-surface-dim block"
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -36,28 +39,32 @@ export default function ProjectsSection() {
                   height={338}
                   className="project-image w-full h-full object-cover"
                 />
-              </div>
+              </Link>
               <div className="p-6 space-y-4">
                 <div className="flex gap-2 flex-wrap">
                   {tags.map((tag) => (
                     <Tag key={tag} label={tag} />
                   ))}
                 </div>
-                <h3 className="font-headline-lg-mobile text-headline-lg-mobile text-charcoal-deep dark:text-on-surface transition-colors group-hover:text-primary">
-                  {title}
-                </h3>
+                <Link
+                  href={`/projects/${slug}`}
+                  className="font-headline-lg-mobile text-headline-lg-mobile text-charcoal-deep dark:text-on-surface transition-colors group-hover:text-primary hover:underline"
+                >
+                  <h3>{title}</h3>
+                </Link>
                 <p className="font-body-md text-body-md text-on-secondary-container">
                   {description}
                 </p>
-                <Link
-                  href={`/projects/${slug}`}
-                  className="inline-flex items-center text-primary font-label-md text-label-md group-hover:underline"
-                >
-                  Case Study{" "}
-                  <span className="material-symbols-outlined ml-1 text-sm transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-                    open_in_new
-                  </span>
-                </Link>
+                <div className="flex justify-end">
+                  <Link
+                    href={`/projects/${slug}`}
+                    className="inline-flex items-center text-primary font-label-md text-label-md group-hover:underline"
+                  >
+                    <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                      open_in_new
+                    </span>
+                  </Link>
+                </div>
               </div>
             </Reveal>
           ),
