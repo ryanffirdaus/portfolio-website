@@ -16,25 +16,14 @@ export const projectSummaries: ProjectSummary[] = [
     },
   },
   {
-    slug: "system-modernization",
-    title: "System Modernization",
-    tags: ["Laravel", "React"],
+    slug: "servio",
+    title: "Servio",
+    tags: ["React", "Express", "Supabase", "Midtrans", "Docker"],
     description:
-      "Migrated monolithic legacy PHP system to decoupled architecture, achieving 98% CPU efficiency gain.",
+      "Full-stack restaurant management platform with a touch-first POS, kitchen display, and role-based workflows for waiters, kitchen, cashiers, and admins — built on React, Express, and Supabase, with Midtrans-powered online payments.",
     image: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBhldXTvX56e4dVCSH488TP7cniirwC1k8gU-SJFt3DfBgBFzbmjippvkib7pYFjcn3GSaNM0axVjyXt7CslvH6KehlDC61H465AhfwmISXKFKeSNhwb9VFLvZfWtrspFr4I7U8ZgS-vxVsXZQeyTxUmFaqPU48cQEu32rXsczbua6yJCiA4eaB0T3Vr6J8lfIW1jzFcoomDbszz9fIt9cX0i-ufBYpSZUPYMOXwIGb8wB90Ec3k-_TrwhO1GgvKW0kNm4vKznvieQ",
-      alt: "Legacy Migration",
-    },
-  },
-  {
-    slug: "api-gateway",
-    title: "API Gateway Service",
-    tags: ["Docker", "Go"],
-    description:
-      "Centralized auth and routing layer for 15+ microservices with integrated monitoring and rate limiting.",
-    image: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuB68h5RP5hrs26Cnntd9_PHzIlXCxKEzZXkzM9aavENo7WEJeQUt6KEqd4ojEZWlqXi94e9gKVvFuXg-U90cmtZIBVzeYAryS8kpX0z_tg9-AdKcxyMZX0mxGnjA_UTjZXTAMIPfZouu3U24MXQu3B9eJJU9AWD0YaFWeYuoldW7SzHGBFZeAA-K9f2TctnLoiqruhYiMskcWUnOxxBPwuK6LAp-L0zw8N9nl8C0GB6LsXE-eZknXJjaoynEZIHQVC8UUw9EnligVo",
-      alt: "Microservices Architecture",
+      src: "/images/projects/servio/servio_thumbnail.webp",
+      alt: "Servio Restaurant Management System",
     },
   },
 ];
@@ -156,6 +145,121 @@ const projectDetails: Record<string, ProjectDetail> = {
         title: "Docker",
         description:
           "All services are containerized and deployed on Linux servers through automated pipelines, ensuring environment parity and enabling reliable horizontal scaling.",
+      },
+    ],
+  },
+  servio: {
+    slug: "servio",
+    title: "Servio",
+    tags: ["React", "Express", "Supabase", "Midtrans", "Docker"],
+    description:
+      "Servio is a full-stack restaurant management system that runs front-of-house and back-of-house operations from a single platform. It coordinates the entire service lifecycle — seating a table, opening an order session, sending tickets to the kitchen, serving, and settling the bill — across dedicated interfaces for admins, waiters, kitchen staff, and cashiers. A React and Vite front end talks to a TypeScript Express API backed by Supabase (PostgreSQL with Row Level Security), with online payments handled through the Midtrans payment gateway and confirmed via webhook.",
+    liveUrl: "https://rms.ryanffirdaus.my.id",
+    demoCredentials: [
+      { role: "Admin", email: "admin@omni.com", password: "admin123" },
+      { role: "Waiter", email: "waiter@omni.com", password: "waiter123" },
+      { role: "Kitchen", email: "chef@omni.com", password: "chef123" },
+      { role: "Cashier", email: "cashier@omni.com", password: "cashier123" },
+    ],
+    heroImage: {
+      src: "/images/projects/servio/servio_thumbnail.webp",
+      alt: "Servio Restaurant Management System",
+    },
+    gallery: [
+      {
+        src: "/images/projects/servio/dashboard_analytics.webp",
+        alt: "Dashboard & Analytics",
+      },
+      {
+        src: "/images/projects/servio/order_management.webp",
+        alt: "Order Management",
+      },
+      {
+        src: "/images/projects/servio/point_of_sale.webp",
+        alt: "Point of Sale",
+      },
+      {
+        src: "/images/projects/servio/kitchen_display.webp",
+        alt: "Kitchen Display",
+      },
+      {
+        src: "/images/projects/servio/table_floor_plan.webp",
+        alt: "Table & Floor Plan",
+      },
+      {
+        src: "/images/projects/servio/menu_management.webp",
+        alt: "Menu Management",
+      },
+    ],
+    challenge: [
+      "Restaurant service is a high-pressure, multi-role choreography: waiters take orders at the table, the kitchen works a queue of tickets, and cashiers close out bills — often all at once during a busy hour. Generic point-of-sale tools rarely model these handoffs cleanly, leaving staff to reconcile state by shouting across the pass. Servio needed to give each role a purpose-built view while maintaining a single, authoritative order state that everyone can trust.",
+      "The system is organised around an explicit order lifecycle — Pending → Preparing → Ready → Completed, with Cancelled as an escape hatch — enforced by the Express API. Each interface polls for the latest order and payment state on a short interval, so the kitchen, waiter, and cashier screens stay current through a busy shift. Access is scoped by role through Supabase Row Level Security, online checkout runs through the Midtrans payment gateway with server-side webhook confirmation before an order is marked paid, and the stack is containerised with Docker behind an Nginx reverse proxy for consistent, reproducible deployments.",
+    ],
+    architecture: {
+      cards: [
+        {
+          icon: "restaurant",
+          iconFill: true,
+          iconAnimation: "scale",
+          title: "Role-Based Operations",
+          description:
+            "Purpose-built interfaces for admins, waiters, kitchen, and cashiers — from a touch-first POS and table floor plan to a kitchen display — each surfacing only what that role needs to keep service moving.",
+        },
+        {
+          icon: "receipt_long",
+          iconFill: true,
+          iconAnimation: "scale",
+          title: "Orders & Payments",
+          description:
+            "A server-enforced order lifecycle (Pending → Preparing → Ready → Completed) drives the floor, with checkout handled through the Midtrans payment gateway and confirmed by webhook before an order is marked paid.",
+        },
+        {
+          icon: "deployed_code",
+          iconFill: true,
+          iconAnimation: "rotate",
+          title: "Data & Infrastructure",
+          description:
+            "A TypeScript Express API on Supabase PostgreSQL with Row Level Security, containerised with Docker behind an Nginx reverse proxy for a reproducible production deployment.",
+        },
+      ],
+    },
+    keyResults: [
+      { target: 4, label: "User Roles" },
+      { target: 10, suffix: "+", label: "Feature Modules" },
+      { target: 5, label: "Order Statuses" },
+      { target: 5, label: "Menu Categories" },
+      { target: 3, label: "Dockerized Services" },
+    ],
+    techStack: [
+      {
+        number: "01",
+        title: "React + Vite",
+        description:
+          "A component-driven front end with role-based routing, a touch-first point-of-sale, an interactive table floor plan, and operational dashboards — bundled with Vite for fast builds and a lean static production output.",
+      },
+      {
+        number: "02",
+        title: "Express.js",
+        description:
+          "A TypeScript Express API owns business logic and the order state machine, exposing REST endpoints for menus, orders, tables, payments, and staff while gating actions by role. Client screens poll these endpoints to stay current during a shift.",
+      },
+      {
+        number: "03",
+        title: "Supabase / PostgreSQL",
+        description:
+          "Cloud-hosted PostgreSQL via Supabase provides the relational data model and authentication, with Row Level Security policies enforcing role-scoped access to orders, inventory, and reports.",
+      },
+      {
+        number: "04",
+        title: "Midtrans",
+        description:
+          "Online payments are processed through the Midtrans payment gateway: the cashier initiates a transaction and the backend confirms settlement via a server-side webhook before the order is marked paid.",
+      },
+      {
+        number: "05",
+        title: "Docker & Nginx",
+        description:
+          "The frontend and backend are containerised and served behind an Nginx reverse proxy that routes traffic between the React app and the Express API, giving a consistent, reproducible production deployment.",
       },
     ],
   },

@@ -52,11 +52,21 @@ export interface GalleryImage {
   alt: string;
 }
 
+export interface DemoCredential {
+  role: string;
+  email: string;
+  password: string;
+}
+
 export interface ProjectDetail {
   slug: string;
   title: string;
   tags: string[];
   description: string;
+  /** Optional link to a live/production deployment of the project */
+  liveUrl?: string;
+  /** Optional demo login credentials shown on the project page */
+  demoCredentials?: DemoCredential[];
   heroImage: { src: string; alt: string };
   gallery: GalleryImage[];
   challenge: string[];

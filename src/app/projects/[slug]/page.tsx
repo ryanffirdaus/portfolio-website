@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getProjectDetail } from "@/data/projects";
 import { projectSummaries } from "@/data/projects";
 import ProjectHero from "@/components/project/ProjectHero";
+import LiveDemoSection from "@/components/project/LiveDemoSection";
 import Gallery from "@/components/project/Gallery";
 import OverviewSection from "@/components/project/OverviewSection";
 import ArchitectureGrid from "@/components/project/ArchitectureGrid";
@@ -37,6 +38,12 @@ export default async function ProjectPage({ params }: Props) {
     <main className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-16 pb-section-gap overflow-hidden">
       <ProjectHero project={project} />
       <Gallery images={project.gallery} />
+      {project.liveUrl && (
+        <LiveDemoSection
+          liveUrl={project.liveUrl}
+          credentials={project.demoCredentials}
+        />
+      )}
       <OverviewSection paragraphs={project.challenge} />
       <ArchitectureGrid cards={project.architecture.cards} />
       <KeyResults results={project.keyResults} />
