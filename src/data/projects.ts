@@ -171,24 +171,28 @@ const projectDetails: Record<string, ProjectDetail> = {
         alt: "Dashboard & Analytics",
       },
       {
+        src: "/images/projects/servio/menu_management.webp",
+        alt: "Menu Management",
+      },
+      {
         src: "/images/projects/servio/order_management.webp",
         alt: "Order Management",
-      },
-      {
-        src: "/images/projects/servio/point_of_sale.webp",
-        alt: "Point of Sale",
-      },
-      {
-        src: "/images/projects/servio/kitchen_display.webp",
-        alt: "Kitchen Display",
       },
       {
         src: "/images/projects/servio/table_floor_plan.webp",
         alt: "Table & Floor Plan",
       },
       {
-        src: "/images/projects/servio/menu_management.webp",
-        alt: "Menu Management",
+        src: "/images/projects/servio/waiter_order_creation.webp",
+        alt: "Waiter Order Creation",
+      },
+      {
+        src: "/images/projects/servio/kitchen_display.webp",
+        alt: "Kitchen Display",
+      },
+      {
+        src: "/images/projects/servio/point_of_sale.webp",
+        alt: "Point of Sale",
       },
     ],
     challenge: [
