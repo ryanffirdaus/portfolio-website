@@ -23,8 +23,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectDetail(slug);
   if (!project) return {};
   return {
-    title: `${project.title}`,
+    title: project.title,
     description: project.description,
+    keywords: project.tags,
+    alternates: {
+      canonical: `/projects/${project.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: project.title,
+      description: project.description,
+      url: `/projects/${project.slug}`,
+      images: [{ url: project.heroImage.src, alt: project.heroImage.alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: [project.heroImage.src],
+    },
   };
 }
 

@@ -19,7 +19,7 @@ export default function HeroSection() {
 
           {/* Headline */}
           <h1 className="font-display text-display text-charcoal-deep dark:text-on-surface leading-tight opacity-0 animate-fade-in-up delay-200">
-            {personal.name}. <br />
+            {personal.name} <br />
             <span className="text-primary">{personal.title}</span>
           </h1>
 

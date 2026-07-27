@@ -5,6 +5,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/app/providers/ThemeProvider";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { personal } from "@/data/personal";
+import { SITE_URL, SITE_KEYWORDS } from "@/data/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,10 +19,44 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const title = `${personal.name} | ${personal.title}`;
+
 export const metadata: Metadata = {
-  title: "Ryan Faatih Firdaus | Software Engineer",
-  description:
-    "Software Engineer delivering high-impact back-end and IoT solutions.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: title,
+    template: `%s | ${personal.name}`,
+  },
+  description: personal.bio,
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: personal.name, url: SITE_URL }],
+  creator: personal.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: title,
+    title,
+    description: personal.bio,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: personal.bio,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
