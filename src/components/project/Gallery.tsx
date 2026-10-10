@@ -8,6 +8,8 @@ import type { GalleryImage } from "@/types";
 
 interface Props {
   images: GalleryImage[];
+  /** Portrait phone screenshots: taller thumbnails, shorter viewer */
+  mobile?: boolean;
 }
 
 // Attaches drag-to-scroll imperatively. Call inside useEffect with the element.
@@ -61,7 +63,7 @@ function getImageLabel(src: string) {
     .join(" ");
 }
 
-export default function Gallery({ images }: Props) {
+export default function Gallery({ images, mobile = false }: Props) {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
@@ -145,7 +147,10 @@ export default function Gallery({ images }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox]);
 
-  const THUMB_MAX_W = "calc(6 * 6rem + 5 * 0.5rem)";
+  const THUMB_MAX_W = mobile
+    ? "calc(9 * 3rem + 8 * 0.5rem)"
+    : "calc(6 * 6rem + 5 * 0.5rem)";
+  const thumbSize = mobile ? "h-20 w-12" : "h-14 w-24";
 
   return (
     <>
@@ -163,7 +168,9 @@ export default function Gallery({ images }: Props) {
             width={1920}
             height={1080}
             sizes="(min-width: 1344px) 1296px, 100vw"
-            className="aspect-video w-full object-contain"
+            className={`w-full object-contain ${
+              mobile ? "aspect-4/5 py-6 md:aspect-video md:py-8" : "aspect-video"
+            }`}
             priority
           />
           <span className="absolute top-4 right-4 z-10 rounded-input border border-pewter bg-void p-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -196,7 +203,7 @@ export default function Gallery({ images }: Props) {
                   onClick={() => go(idx)}
                   aria-label={alt}
                   aria-current={idx === active}
-                  className={`h-14 w-24 shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
+                  className={`${thumbSize} shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
                     idx === active
                       ? "border-signal"
                       : "border-transparent opacity-50 hover:opacity-90"
@@ -207,7 +214,7 @@ export default function Gallery({ images }: Props) {
                     alt=""
                     width={200}
                     height={120}
-                    className="pointer-events-none h-full w-full object-cover"
+                    className="pointer-events-none h-full w-full object-cover object-top"
                   />
                 </button>
               ))}
@@ -274,7 +281,7 @@ export default function Gallery({ images }: Props) {
                   onClick={() => go(idx)}
                   aria-label={alt}
                   aria-current={idx === active}
-                  className={`h-14 w-24 shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
+                  className={`${thumbSize} shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
                     idx === active
                       ? "border-signal"
                       : "border-transparent opacity-50 hover:opacity-90"
@@ -285,7 +292,7 @@ export default function Gallery({ images }: Props) {
                     alt=""
                     width={200}
                     height={120}
-                    className="pointer-events-none h-full w-full object-cover"
+                    className="pointer-events-none h-full w-full object-cover object-top"
                   />
                 </button>
               ))}

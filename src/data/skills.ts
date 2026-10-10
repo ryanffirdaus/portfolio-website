@@ -5,14 +5,17 @@ export const skills: Skill[] = [
   { name: "PHP", category: "Languages", icon: "php" },
   { name: "JavaScript", category: "Languages", icon: "javascript" },
   { name: "TypeScript", category: "Languages", icon: "typescript" },
+  { name: "Dart", category: "Languages", icon: "dart" },
   // Frameworks & Runtimes
   { name: "Laravel", category: "Frameworks & Runtimes", icon: "laravel" },
   { name: "Node.js", category: "Frameworks & Runtimes", icon: "nodedotjs" },
   { name: "React", category: "Frameworks & Runtimes", icon: "react" },
+  { name: "Flutter", category: "Frameworks & Runtimes", icon: "flutter" },
   // Databases
   { name: "MySQL", category: "Databases", icon: "mysql" },
   { name: "PostgreSQL", category: "Databases", icon: "postgresql" },
   { name: "Supabase", category: "Databases", icon: "supabase" },
+  { name: "SQLite", category: "Databases", icon: "sqlite" },
   // DevOps & Infrastructure
   { name: "Docker", category: "DevOps & Infrastructure", icon: "docker" },
   { name: "Linux", category: "DevOps & Infrastructure", icon: "linux" },

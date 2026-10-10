@@ -48,6 +48,7 @@ export default function ProjectsSection() {
                 <div className={reversed ? "md:order-1" : ""}>
                   <div className="flex flex-wrap gap-2">
                     {detail?.liveUrl && <Badge tone="live">Live demo</Badge>}
+                    {detail?.sourceUrl && <Badge tone="info">Open source</Badge>}
                     {tags.map((tag) => (
                       <Badge key={tag}>{tag}</Badge>
                     ))}

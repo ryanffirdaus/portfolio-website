@@ -9,6 +9,7 @@ export const SITE_KEYWORDS = [
   "Laravel Developer",
   "Node.js Developer",
   "React Developer",
+  "Flutter Developer",
   "Jakarta Software Engineer",
   "Indonesia Software Engineer",
 ];

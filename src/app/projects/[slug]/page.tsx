@@ -65,6 +65,7 @@ export default async function ProjectPage({ params }: Props) {
       <header className="mt-12 max-w-240">
         <div className="flex flex-wrap gap-2">
           {project.liveUrl && <Badge tone="live">Live demo</Badge>}
+          {project.sourceUrl && <Badge tone="info">Open source</Badge>}
           {project.tags.map((tag) => (
             <Badge key={tag}>{tag}</Badge>
           ))}
@@ -73,20 +74,51 @@ export default async function ProjectPage({ params }: Props) {
           {project.title}
         </h1>
         <p className="mt-6 text-subheading text-fog">{project.description}</p>
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${button.primary} mt-8`}
-          >
-            Open the demo <Icon name="arrow-up-right" />
-          </a>
+        {(project.liveUrl || project.downloadUrl || project.sourceUrl) && (
+          <div className="mt-8 flex flex-wrap gap-3">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={button.primary}
+              >
+                Open the demo <Icon name="arrow-up-right" />
+              </a>
+            )}
+            {project.downloadUrl && (
+              <a
+                href={project.downloadUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={project.liveUrl ? button.outline : button.primary}
+              >
+                Download the APK <Icon name="arrow-up-right" />
+              </a>
+            )}
+            {project.sourceUrl && (
+              <a
+                href={project.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={
+                  project.liveUrl || project.downloadUrl
+                    ? button.outline
+                    : button.primary
+                }
+              >
+                View source on GitHub <Icon name="arrow-up-right" />
+              </a>
+            )}
+          </div>
         )}
       </header>
 
       <div className="mt-16 space-y-24">
-        <Gallery images={project.gallery} />
+        <Gallery
+          images={project.gallery}
+          mobile={project.platform === "mobile"}
+        />
         <KeyResults results={project.keyResults} />
 
         <section className="grid gap-6 md:grid-cols-12">

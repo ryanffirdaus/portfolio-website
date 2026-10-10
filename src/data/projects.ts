@@ -5,6 +5,17 @@ import type { ProjectSummary, ProjectDetail } from "@/types";
 // ─────────────────────────────────────────────
 export const projectSummaries: ProjectSummary[] = [
   {
+    slug: "b4due",
+    title: "B4Due",
+    tags: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod"],
+    description:
+      "An open-source Android app that reminds you before bills and subscriptions are due. No account and no server: bills and payments stay on the phone, and the only network request fetches exchange rates for bills priced in foreign currencies.",
+    image: {
+      src: "/images/projects/b4due/b4due_cover.webp",
+      alt: "B4Due home, statistics, and dark-mode home screens",
+    },
+  },
+  {
     slug: "smartcool",
     title: "Smartcool Monitoring",
     tags: ["Laravel", "Node.js", "React", "MQTT", "Docker", "Redis"],
@@ -32,6 +43,105 @@ export const projectSummaries: ProjectSummary[] = [
 // Full project detail data (one entry per slug)
 // ─────────────────────────────────────────────
 const projectDetails: Record<string, ProjectDetail> = {
+  b4due: {
+    slug: "b4due",
+    title: "B4Due",
+    tags: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod"],
+    description:
+      "B4Due is a bill and subscription reminder for Android, built for Indonesian households: electricity, BPJS, vehicle tax, instalments, streaming, and subscriptions billed in dollars. It reminds you 7, 3 and 1 day before a bill is due and on the day itself, and you can mark the bill as paid straight from the notification. A calendar view and spending statistics show where the money goes. There is no account and no server, so it costs nothing to run for anyone. The interface ships in Bahasa Indonesia and English, in light and dark mode.",
+    sourceUrl: "https://github.com/ryanffirdaus/b-4-due",
+    downloadUrl: "https://github.com/ryanffirdaus/b-4-due/releases",
+    platform: "mobile",
+    heroImage: {
+      src: "/images/projects/b4due/b4due_cover.webp",
+      alt: "B4Due home, statistics, and dark-mode home screens",
+    },
+    gallery: [
+      { src: "/images/projects/b4due/home_light.webp", alt: "Home" },
+      { src: "/images/projects/b4due/calendar.webp", alt: "Bill calendar" },
+      {
+        src: "/images/projects/b4due/statistics.webp",
+        alt: "Spending statistics",
+      },
+      {
+        src: "/images/projects/b4due/bill_form_usd.webp",
+        alt: "Bill form in US dollars",
+      },
+      {
+        src: "/images/projects/b4due/notification.webp",
+        alt: "Notification actions",
+      },
+      { src: "/images/projects/b4due/home_dark.webp", alt: "Home dark mode" },
+    ],
+    challenge: [
+      "Bill reminders only matter if they fire. Without a server there is no push service to fall back on, so every reminder has to be scheduled on the device itself, survive reboots, and get past the aggressive battery savers on Xiaomi, OPPO, vivo and similar phones. The \"Mark as paid\" button on a notification also runs while the app is closed, in a separate isolate, and must never record the same payment twice. And because many subscriptions are billed in dollars, the app needs current exchange rates without giving up its offline, account-free design.",
+      "Scheduling is a pure function: bills, settings and the current time go in, and a list of notifications with deterministic IDs comes out. A sync step reconciles the OS queue against that list, so re-running it is idempotent and can never duplicate a reminder. Notification actions share one Drift database server across isolates and pay a bill inside a single idempotent transaction. Recurring dates are civil dates on an anchor day, so a bill due on the 31st stays on the 31st after February. Exchange rates are an anonymous request to the European Central Bank's reference rates, cached locally, so reminders, totals and statistics keep working in rupiah when the phone is offline.",
+    ],
+    architecture: {
+      cards: [
+        {
+          title: "Pure Scheduling Planner",
+          description:
+            "planNotifications() turns bills, settings and the current time into reminders keyed by bill, due date and offset, hashed to stable IDs. ReminderSync cancels what is no longer planned and reschedules the rest on launch, resume, every data change, restore, and a 12-hourly WorkManager task.",
+        },
+        {
+          title: "Background Isolate Actions",
+          description:
+            "Notification actions run with the app closed. All isolates connect to one shared Drift database server, and paying a bill is a single write-locked transaction that ignores double taps, duplicate deliveries, and stale notifications for an earlier period.",
+        },
+        {
+          title: "Offline First, Private by Default",
+          description:
+            "No account, backend or analytics. The only network call is a GET for exchange rates that carries no user data, with a timeout, size cap and local cache. Backups are JSON files the user keeps in their own storage, and CI rejects any APK that asks for a permission outside an allowlist.",
+        },
+      ],
+    },
+    keyResults: [
+      { target: 0, label: "Accounts or Servers" },
+      { target: 148, label: "Automated Tests" },
+      { target: 16, label: "Foreign Currencies" },
+      { target: 23, label: "Bill Templates" },
+      { target: 2, label: "Languages (ID, EN)" },
+    ],
+    techStack: [
+      {
+        number: "01",
+        title: "Flutter + Riverpod",
+        description:
+          "A feature-first Flutter app with Riverpod for state and a five-tab go_router shell. Domain code has no Flutter imports, so date rules and the scheduler are unit-tested without a device.",
+      },
+      {
+        number: "02",
+        title: "Drift / SQLite",
+        description:
+          "Local SQLite through Drift with UUID keys, soft deletes, and step-by-step migrations tested from every earlier schema version with real rows. SQLite is compiled from a vendored amalgamation so release builds download no prebuilt binaries, as F-Droid requires.",
+      },
+      {
+        number: "03",
+        title: "Local Notifications",
+        description:
+          "flutter_local_notifications with exact alarms schedules a rolling horizon of reminders (120 days on Android, 64 notifications on iOS). Per-brand battery guidance, a test-notification button, and optional calendar alarms cover phones that kill background work.",
+      },
+      {
+        number: "04",
+        title: "Background Isolates",
+        description:
+          "Notification actions and WorkManager tasks run in their own isolates but connect to one shared Drift server, so a payment made from the notification updates the open home screen immediately. Tests run six simultaneous deliveries of the same action against one SQLite file.",
+      },
+      {
+        number: "05",
+        title: "Exchange Rates",
+        description:
+          "Bills can be priced in 16 foreign currencies. Daily ECB reference rates come from Frankfurter, are cached in SQLite and refreshed every 12 hours, and each foreign bill keeps its original amount so the rupiah estimate is recomputed after every refresh.",
+      },
+      {
+        number: "06",
+        title: "GitHub Actions",
+        description:
+          "CI runs analyze, unit, widget, migration and golden tests in light and dark mode, then audits the built APK's permissions. release-please cuts semver releases from Conventional Commits, every green build on main ships a signed nightly APK, and users can auto-update through Obtainium.",
+      },
+    ],
+  },
   smartcool: {
     slug: "smartcool",
     title: "Smartcool Monitoring",

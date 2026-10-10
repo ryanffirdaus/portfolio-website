@@ -62,6 +62,12 @@ export interface ProjectDetail {
   description: string;
   /** Optional link to a live/production deployment of the project */
   liveUrl?: string;
+  /** Optional link to the public source repository */
+  sourceUrl?: string;
+  /** Optional link to downloadable builds (e.g. GitHub Releases) */
+  downloadUrl?: string;
+  /** "mobile" = portrait phone screenshots in the gallery */
+  platform?: "web" | "mobile";
   /** Optional demo login credentials shown on the project page */
   demoCredentials?: DemoCredential[];
   heroImage: { src: string; alt: string };

@@ -7,7 +7,8 @@ import { personal } from "@/data/personal";
 import { projectSummaries } from "@/data/projects";
 
 export default function HeroSection() {
-  const featured = projectSummaries[0];
+  const featured =
+    projectSummaries.find((p) => p.slug === "smartcool") ?? projectSummaries[0];
 
   return (
     <section className={`${container} pt-20 md:pt-28`}>
