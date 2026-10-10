@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Reveal from "@/components/ui/Reveal";
+import Icon from "@/components/ui/Icon";
+import { button } from "@/components/ui/styles";
 import type { GalleryImage } from "@/types";
 
 interface Props {
@@ -144,14 +145,15 @@ export default function Gallery({ images }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox]);
 
-  const THUMB_MAX_W = "calc(5 * 5rem + 4 * 0.5rem)";
+  const THUMB_MAX_W = "calc(6 * 6rem + 5 * 0.5rem)";
 
   return (
     <>
-      <Reveal className="mb-section-gap space-y-3">
-        {/* Main image */}
-        <div
-          className="relative overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-dim cursor-zoom-in"
+      <section aria-label="Screenshots">
+        <button
+          type="button"
+          aria-label="Open image full screen"
+          className="group relative block w-full cursor-zoom-in overflow-hidden rounded-card bg-panel"
           onClick={() => setLightbox(true)}
         >
           <Image
@@ -160,189 +162,137 @@ export default function Gallery({ images }: Props) {
             alt={images[active].alt}
             width={1920}
             height={1080}
-            className="w-full aspect-video object-contain transition-opacity duration-300"
+            sizes="(min-width: 1344px) 1296px, 100vw"
+            className="aspect-video w-full object-contain"
             priority
           />
-          <div className="absolute bottom-3 right-3 flex items-center justify-center w-8 h-8 rounded-lg bg-surface/80 border border-outline-variant/30 text-on-surface backdrop-blur-sm pointer-events-none">
-            <span className="material-symbols-outlined text-[16px]">
-              zoom_in
+          <span className="absolute top-4 right-4 z-10 rounded-input border border-pewter bg-void p-2 text-white opacity-0 transition-opacity group-hover:opacity-100">
+            <Icon name="expand" />
+          </span>
+        </button>
+
+        <div className="mt-6 flex flex-col items-center gap-4 md:flex-row md:justify-between">
+          <p className="text-body-sm text-fog">
+            <span className="text-white tabular-nums">
+              {String(active + 1).padStart(2, "0")}
             </span>
-          </div>
-        </div>
+            <span className="text-muted"> / {String(images.length).padStart(2, "0")}</span>
+            <span className="ml-3">{getImageLabel(images[active].src)}</span>
+          </p>
 
-        {/* Image caption */}
-        <p className="text-center text-sm text-on-surface-variant">
-          {getImageLabel(images[active].src)}
-        </p>
-
-        {/* Thumbnail strip */}
-        <div className="flex justify-center">
-          <div className="flex items-center gap-2">
-            <button
-              aria-label="Previous image"
-              onClick={prev}
-              className="shrink-0 flex items-center justify-center w-9 h-9 rounded-lg border border-outline-variant/30 bg-surface text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-200 active:scale-95"
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                arrow_back
-              </span>
+          <div className="flex max-w-full items-center gap-2">
+            <button aria-label="Previous image" onClick={prev} className={button.tool}>
+              <Icon name="arrow-left" />
             </button>
-
-            <div className="relative overflow-hidden">
-              <div
-                ref={thumbRef}
-                className="flex gap-2 overflow-x-auto hide-scrollbar select-none"
-                style={{ maxWidth: THUMB_MAX_W }}
-                onClickCapture={onThumbClickCapture}
-              >
-                {images.map(({ src, alt }, idx) => (
-                  <button
-                    key={alt}
-                    onClick={() => go(idx)}
-                    aria-label={alt}
-                    className={`shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                      idx === active
-                        ? "border-primary opacity-100 scale-[1.03]"
-                        : "border-outline-variant/30 opacity-60 hover:opacity-90 hover:border-outline-variant"
-                    }`}
-                  >
-                    <Image
-                      src={src}
-                      alt={alt}
-                      width={200}
-                      height={120}
-                      className="w-full h-full object-cover pointer-events-none"
-                    />
-                  </button>
-                ))}
-              </div>
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-linear-to-r from-surface to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-linear-to-l from-surface to-transparent" />
+            <div
+              ref={thumbRef}
+              className="hide-scrollbar flex gap-2 overflow-x-auto select-none"
+              style={{ maxWidth: THUMB_MAX_W }}
+              onClickCapture={onThumbClickCapture}
+            >
+              {images.map(({ src, alt }, idx) => (
+                <button
+                  key={alt}
+                  onClick={() => go(idx)}
+                  aria-label={alt}
+                  aria-current={idx === active}
+                  className={`h-14 w-24 shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
+                    idx === active
+                      ? "border-signal"
+                      : "border-transparent opacity-50 hover:opacity-90"
+                  }`}
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    width={200}
+                    height={120}
+                    className="pointer-events-none h-full w-full object-cover"
+                  />
+                </button>
+              ))}
             </div>
-
-            <button
-              aria-label="Next image"
-              onClick={next}
-              className="shrink-0 flex items-center justify-center w-9 h-9 rounded-lg border border-outline-variant/30 bg-surface text-on-surface hover:bg-primary hover:text-on-primary hover:border-primary transition-all duration-200 active:scale-95"
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                arrow_forward
-              </span>
+            <button aria-label="Next image" onClick={next} className={button.tool}>
+              <Icon name="arrow-right" />
             </button>
           </div>
         </div>
-      </Reveal>
+      </section>
 
-      {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-black/60 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image viewer"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-void/95 px-4"
           onClick={() => setLightbox(false)}
         >
-          {/* Top bar */}
           <div
-            className="absolute top-0 left-0 right-0 flex items-center justify-between px-4 py-3 z-10"
+            className="absolute inset-x-0 top-0 flex items-center justify-between px-6 py-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <span className="text-white/60 text-sm tabular-nums">
-              {active + 1} / {images.length}
+            <span className="text-body-sm text-fog tabular-nums">
+              {active + 1} / {images.length} · {getImageLabel(images[active].src)}
             </span>
             <button
-              aria-label="Close lightbox"
+              aria-label="Close"
               onClick={() => setLightbox(false)}
-              className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-all duration-200"
+              className={button.tool}
             >
-              <span className="material-symbols-outlined text-[20px]">
-                close
-              </span>
+              <Icon name="close" size={18} />
             </button>
           </div>
 
-          {/* Image */}
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
+          <div onClick={(e) => e.stopPropagation()}>
             <Image
               key={images[active].src}
               src={images[active].src}
               alt={images[active].alt}
               width={1920}
               height={1080}
-              className="max-w-[85vw] max-h-[70vh] w-auto h-auto object-contain rounded-xl"
+              className="h-auto max-h-[72vh] w-auto max-w-[90vw] rounded-chip object-contain"
               priority
             />
           </div>
 
-          {/* Image caption */}
-          <p
-            className="text-center text-sm text-white/60"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {getImageLabel(images[active].src)}
-          </p>
-
-          {/* Thumbnail strip in lightbox */}
           <div
-            className="flex justify-center px-4 w-full"
+            className="flex max-w-full items-center gap-2"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-2">
-              <button
-                aria-label="Previous image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  prev();
-                }}
-                className="shrink-0 flex items-center justify-center w-9 h-9 rounded-lg border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-all duration-200 active:scale-95"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  arrow_back
-                </span>
-              </button>
-
-              <div className="relative overflow-hidden">
-                <div
-                  ref={lightboxThumbRef}
-                  className="flex gap-2 overflow-x-auto hide-scrollbar select-none"
-                  style={{ maxWidth: THUMB_MAX_W }}
-                  onClickCapture={onLightboxClickCapture}
+            <button aria-label="Previous image" onClick={prev} className={button.tool}>
+              <Icon name="arrow-left" />
+            </button>
+            <div
+              ref={lightboxThumbRef}
+              className="hide-scrollbar flex gap-2 overflow-x-auto select-none"
+              style={{ maxWidth: THUMB_MAX_W }}
+              onClickCapture={onLightboxClickCapture}
+            >
+              {images.map(({ src, alt }, idx) => (
+                <button
+                  key={alt}
+                  onClick={() => go(idx)}
+                  aria-label={alt}
+                  aria-current={idx === active}
+                  className={`h-14 w-24 shrink-0 overflow-hidden rounded-input border-2 transition-opacity ${
+                    idx === active
+                      ? "border-signal"
+                      : "border-transparent opacity-50 hover:opacity-90"
+                  }`}
                 >
-                  {images.map(({ src, alt }, idx) => (
-                    <button
-                      key={alt}
-                      onClick={() => go(idx)}
-                      aria-label={alt}
-                      className={`shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                        idx === active
-                          ? "border-white opacity-100 scale-[1.05]"
-                          : "border-white/20 opacity-50 hover:opacity-80 hover:border-white/40"
-                      }`}
-                    >
-                      <Image
-                        src={src}
-                        alt={alt}
-                        width={200}
-                        height={120}
-                        className="w-full h-full object-cover pointer-events-none"
-                      />
-                    </button>
-                  ))}
-                </div>
-                <div className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-linear-to-r from-black/60 to-transparent" />
-                <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-linear-to-l from-black/60 to-transparent" />
-              </div>
-
-              <button
-                aria-label="Next image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  next();
-                }}
-                className="shrink-0 flex items-center justify-center w-9 h-9 rounded-lg border border-white/20 bg-white/10 text-white hover:bg-white/20 transition-all duration-200 active:scale-95"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  arrow_forward
-                </span>
-              </button>
+                  <Image
+                    src={src}
+                    alt=""
+                    width={200}
+                    height={120}
+                    className="pointer-events-none h-full w-full object-cover"
+                  />
+                </button>
+              ))}
             </div>
+            <button aria-label="Next image" onClick={next} className={button.tool}>
+              <Icon name="arrow-right" />
+            </button>
           </div>
         </div>
       )}

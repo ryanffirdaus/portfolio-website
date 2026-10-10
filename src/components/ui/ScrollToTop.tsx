@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Icon from "@/components/ui/Icon";
+import { button } from "@/components/ui/styles";
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400);
+    const onScroll = () => setVisible(window.scrollY > 600);
     const onOpen = () => setLightboxOpen(true);
     const onClose = () => setLightboxOpen(false);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -26,11 +28,9 @@ export default function ScrollToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Scroll to top"
-      className="fixed bottom-15 right-15 z-50 flex items-center justify-center w-11 h-11 rounded-lg border border-outline-variant/50 bg-surface-container text-on-surface-variant hover:border-primary hover:text-on-primary hover:bg-primary shadow-md transition-all duration-200"
+      className={`${button.tool} fixed right-6 bottom-6 z-40 bg-void`}
     >
-      <span className="material-symbols-outlined text-[20px]">
-        arrow_upward
-      </span>
+      <Icon name="arrow-up" size={18} />
     </button>
   );
 }

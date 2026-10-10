@@ -19,42 +19,30 @@ export default function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          backgroundColor: "#0a0c0a",
-          backgroundImage:
-            "radial-gradient(circle at 85% 20%, rgba(46,204,113,0.25), transparent 55%)",
+          backgroundColor: "#0e1012",
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "16px",
-            color: "#2ecc71",
-            fontSize: 28,
+            color: "#8b96aa",
+            fontSize: 24,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
           }}
         >
-          <div
-            style={{
-              width: 14,
-              height: 14,
-              borderRadius: 999,
-              backgroundColor: "#2ecc71",
-              display: "flex",
-            }}
-          />
-          {personal.title}
+          {personal.title} · {personal.location}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
-              color: "#f8faf9",
+              color: "#ffffff",
               fontSize: 88,
               fontWeight: 700,
-              lineHeight: 1.1,
+              lineHeight: 1,
+              letterSpacing: "-0.02em",
             }}
           >
             {personal.name}
@@ -62,24 +50,18 @@ export default function Image() {
           <div
             style={{
               display: "flex",
-              marginTop: "28px",
-              color: "#a8c8b2",
+              marginTop: "32px",
+              color: "#a0aaba",
               fontSize: 30,
-              lineHeight: 1.5,
-              maxWidth: 900,
+              lineHeight: 1.45,
+              maxWidth: 940,
             }}
           >
             {personal.bio}
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            color: "#4a6e53",
-            fontSize: 26,
-          }}
-        >
+        <div style={{ display: "flex", color: "#566171", fontSize: 24 }}>
           {siteHost}
         </div>
       </div>

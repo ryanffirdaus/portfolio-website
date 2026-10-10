@@ -23,9 +23,8 @@ export const personal = {
   },
 
   contact: {
-    heading: "Need a",
-    headingAccent: " Custom Software Solution?",
-    body: "I help businesses build scalable web applications, business systems, API integrations, and real-time monitoring platforms. If you have a project in mind, let's talk.",
+    heading: "Have something that needs building?",
+    body: "Web applications, internal business systems, API and payment integrations, real-time monitoring. If you have a project in mind, send a short note about it.",
     email: "ryanfaatih.firdaus@gmail.com",
     location: "Jakarta, Indonesia",
   },

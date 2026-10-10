@@ -83,25 +83,16 @@ const projectDetails: Record<string, ProjectDetail> = {
     architecture: {
       cards: [
         {
-          icon: "devices",
-          iconFill: true,
-          iconAnimation: "scale",
           title: "IoT Device Layer",
           description:
             "600+ connected devices stream live telemetry across 5+ sensor metrics. Node.js microservices handle ingestion, processing pipelines, and real-time delivery to the front end.",
         },
         {
-          icon: "layers",
-          iconFill: true,
-          iconAnimation: "scale",
           title: "Laravel Back End",
           description:
             "REST APIs, third-party integrations, database schema design, and service layers are built in Laravel. Redis caching reduces memory usage by ~75% and accelerates frequent queries.",
         },
         {
-          icon: "deployed_code",
-          iconFill: true,
-          iconAnimation: "rotate",
           title: "Infrastructure",
           description:
             "Containerized with Docker and deployed on Linux servers via automated pipelines, ensuring consistent environments across development and production.",
@@ -202,25 +193,16 @@ const projectDetails: Record<string, ProjectDetail> = {
     architecture: {
       cards: [
         {
-          icon: "restaurant",
-          iconFill: true,
-          iconAnimation: "scale",
           title: "Role-Based Operations",
           description:
             "Purpose-built interfaces for admins, waiters, kitchen, and cashiers — from a touch-first POS and table floor plan to a kitchen display — each surfacing only what that role needs to keep service moving.",
         },
         {
-          icon: "receipt_long",
-          iconFill: true,
-          iconAnimation: "scale",
           title: "Orders & Payments",
           description:
             "A server-enforced order lifecycle (Pending → Preparing → Ready → Completed) drives the floor, with checkout handled through the Midtrans payment gateway and confirmed by webhook before an order is marked paid.",
         },
         {
-          icon: "deployed_code",
-          iconFill: true,
-          iconAnimation: "rotate",
           title: "Data & Infrastructure",
           description:
             "A TypeScript Express API on Supabase PostgreSQL with Row Level Security, containerised with Docker behind an Nginx reverse proxy for a reproducible production deployment.",

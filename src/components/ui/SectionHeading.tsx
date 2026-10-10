@@ -1,19 +1,26 @@
+import { eyebrow as eyebrowClass } from "@/components/ui/styles";
+
 interface SectionHeadingProps {
+  eyebrow: string;
   children: React.ReactNode;
-  /** Show the blue underline accent bar */
-  accent?: boolean;
+  align?: "left" | "center";
   className?: string;
 }
 
-export default function SectionHeading({ children, accent = false, className = "" }: SectionHeadingProps) {
+export default function SectionHeading({
+  eyebrow,
+  children,
+  align = "left",
+  className = "",
+}: SectionHeadingProps) {
   return (
-    <h2
-      className={`font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface relative inline-block ${className}`}
+    <div
+      className={`space-y-3 ${align === "center" ? "text-center" : ""} ${className}`}
     >
-      {children}
-      {accent && (
-        <span className="absolute bottom-0 left-0 w-12 h-1 bg-primary rounded-full" />
-      )}
-    </h2>
+      <p className={eyebrowClass}>{eyebrow}</p>
+      <h2 className="text-heading font-bold text-white md:text-heading-lg">
+        {children}
+      </h2>
+    </div>
   );
 }

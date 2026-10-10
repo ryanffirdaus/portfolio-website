@@ -2,23 +2,23 @@ import type { Skill } from "@/types";
 
 export const skills: Skill[] = [
   // Languages
-  { name: "PHP", category: "Languages", logo: "https://cdn.simpleicons.org/php" },
-  { name: "JavaScript", category: "Languages", logo: "https://cdn.simpleicons.org/javascript" },
-  { name: "TypeScript", category: "Languages", logo: "https://cdn.simpleicons.org/typescript" },
+  { name: "PHP", category: "Languages", icon: "php" },
+  { name: "JavaScript", category: "Languages", icon: "javascript" },
+  { name: "TypeScript", category: "Languages", icon: "typescript" },
   // Frameworks & Runtimes
-  { name: "Laravel", category: "Frameworks & Runtimes", logo: "https://cdn.simpleicons.org/laravel" },
-  { name: "Node.js", category: "Frameworks & Runtimes", logo: "https://cdn.simpleicons.org/nodedotjs" },
-  { name: "React", category: "Frameworks & Runtimes", logo: "https://cdn.simpleicons.org/react" },
+  { name: "Laravel", category: "Frameworks & Runtimes", icon: "laravel" },
+  { name: "Node.js", category: "Frameworks & Runtimes", icon: "nodedotjs" },
+  { name: "React", category: "Frameworks & Runtimes", icon: "react" },
   // Databases
-  { name: "MySQL", category: "Databases", logo: "https://cdn.simpleicons.org/mysql" },
-  { name: "PostgreSQL", category: "Databases", logo: "https://cdn.simpleicons.org/postgresql" },
-  { name: "Supabase", category: "Databases", logo: "https://cdn.simpleicons.org/supabase" },
+  { name: "MySQL", category: "Databases", icon: "mysql" },
+  { name: "PostgreSQL", category: "Databases", icon: "postgresql" },
+  { name: "Supabase", category: "Databases", icon: "supabase" },
   // DevOps & Infrastructure
-  { name: "Docker", category: "DevOps & Infrastructure", logo: "https://cdn.simpleicons.org/docker" },
-  { name: "Linux", category: "DevOps & Infrastructure", logo: "https://cdn.simpleicons.org/linux" },
-  { name: "Redis", category: "DevOps & Infrastructure", logo: "https://cdn.simpleicons.org/redis" },
+  { name: "Docker", category: "DevOps & Infrastructure", icon: "docker" },
+  { name: "Linux", category: "DevOps & Infrastructure", icon: "linux" },
+  { name: "Redis", category: "DevOps & Infrastructure", icon: "redis" },
   { name: "MQTT", category: "DevOps & Infrastructure" },
   // Tools
-  { name: "Git", category: "Tools", logo: "https://cdn.simpleicons.org/git" },
-  { name: "Figma", category: "Tools", logo: "https://cdn.simpleicons.org/figma" },
+  { name: "Git", category: "Tools", icon: "git" },
+  { name: "Figma", category: "Tools", icon: "figma" },
 ];

@@ -7,11 +7,8 @@ export interface ProjectSummary {
 }
 
 export interface ArchitectureCard {
-  icon: string;
-  iconFill?: boolean;
   title: string;
   description: string;
-  iconAnimation?: "scale" | "rotate" | "none";
 }
 
 export interface KeyResult {
@@ -80,7 +77,8 @@ export interface ProjectDetail {
 export interface Skill {
   name: string;
   category: string;
-  logo?: string;
+  /** simpleicons.org slug; rendered as a monochrome mark */
+  icon?: string;
 }
 
 export interface Stat {

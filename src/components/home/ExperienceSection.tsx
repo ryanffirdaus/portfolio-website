@@ -1,104 +1,113 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import Reveal from "@/components/ui/Reveal";
-import { experience } from "@/data/personal";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { container, eyebrow } from "@/components/ui/styles";
+import { education, experience } from "@/data/personal";
 
 export default function ExperienceSection() {
+  const [active, setActive] = useState(0);
+  const job = experience[active];
+
   return (
-    <section className="py-section-gap scroll-mt-24" id="experience">
-      <Reveal className="space-y-3 mb-12">
-        <span className="font-label-md text-label-md text-primary tracking-widest uppercase text-[11px]">
-          Career
-        </span>
-        <h2 className="font-headline-lg text-headline-lg text-charcoal-deep dark:text-on-surface">
-          Work Experience
-        </h2>
-      </Reveal>
+    <section id="experience" className={`${container} scroll-mt-24 py-24`}>
+      <SectionHeading eyebrow="Experience">Where I&apos;ve worked</SectionHeading>
 
-      <div className="relative">
-        {/* Vertical timeline line */}
-        <div className="absolute left-0 md:left-[11px] top-2 bottom-2 w-px bg-outline-variant/40 hidden md:block" />
+      <div
+        role="tablist"
+        aria-label="Employers"
+        className="hide-scrollbar mt-10 flex gap-2 overflow-x-auto"
+      >
+        {experience.map(({ company }, idx) => (
+          <button
+            key={company}
+            role="tab"
+            id={`job-tab-${idx}`}
+            aria-selected={idx === active}
+            aria-controls="job-panel"
+            onClick={() => setActive(idx)}
+            className={`shrink-0 rounded-full border px-5 py-2 text-[15px] font-medium transition-colors ${
+              idx === active
+                ? "border-signal bg-signal text-white"
+                : "border-steel text-fog hover:border-pewter hover:text-white"
+            }`}
+          >
+            {company}
+          </button>
+        ))}
+      </div>
 
-        <div className="space-y-10">
-          {experience.map(
-            (
-              {
-                company,
-                role,
-                period,
-                location,
-                description,
-                highlights,
-                logo,
-              },
-              idx,
-            ) => (
-              <Reveal
-                key={idx}
-                className="md:pl-10 relative"
-                delay={idx === 0 ? "delay-100" : "delay-200"}
+      <div
+        role="tabpanel"
+        id="job-panel"
+        aria-labelledby={`job-tab-${active}`}
+        className="mt-6 grid gap-10 rounded-card bg-panel p-6 md:grid-cols-[45fr_55fr] md:gap-16 md:p-10"
+      >
+        <div>
+          {job.logo && (
+            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-chip bg-white">
+              <Image
+                src={job.logo}
+                alt={`${job.company} logo`}
+                width={48}
+                height={48}
+                className="h-full w-full object-contain"
+              />
+            </div>
+          )}
+          <h3 className="mt-6 text-heading-sm font-bold text-white">
+            {job.role}
+          </h3>
+          <p className="mt-1 text-body text-fog">{job.company}</p>
+          <p className="mt-4 text-body-sm text-ash">
+            {job.period} · {job.location}
+          </p>
+          <p className="mt-6 text-body text-fog">{job.description}</p>
+        </div>
+
+        <ul className="space-y-4">
+          {job.highlights.map((h) => (
+            <li key={h} className="flex gap-4 text-body text-fog">
+              <span
+                aria-hidden="true"
+                className="mt-2.75 h-px w-3 shrink-0 bg-pewter"
+              />
+              {h}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-20">
+        <p className={eyebrow}>Education</p>
+        <ul className="mt-6 space-y-3">
+          {education.map(
+            ({ institution, degree, period, location, description }) => (
+              <li
+                key={institution}
+                className="flex flex-col gap-2 rounded-card bg-panel p-6 md:flex-row md:items-center md:justify-between md:px-10"
               >
-                {/* Timeline dot */}
-                <div className="hidden md:flex absolute left-0 top-1.5 w-[23px] h-[23px] items-center justify-center">
-                  <div className="w-3 h-3 rounded-full bg-primary ring-4 ring-surface" />
-                </div>
-
-                <div className="bg-surface-card border border-outline-variant/30 rounded-lg p-6 hover:border-primary/40 transition-colors">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-                    <div className="flex items-start gap-4">
-                      {logo && (
-                        <div className="w-11 h-11 rounded-md border border-outline-variant/30 bg-surface overflow-hidden shrink-0 flex items-center justify-center">
-                          <Image
-                            src={logo}
-                            alt={`${company} logo`}
-                            width={44}
-                            height={44}
-                            className="object-contain w-full h-full"
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h3 className="font-headline-lg-mobile text-headline-lg-mobile text-charcoal-deep dark:text-on-surface">
-                          {role}
-                        </h3>
-                        <p className="font-label-md text-label-md text-primary mt-0.5">
-                          {company}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-start sm:items-end gap-1 shrink-0">
-                      <span className="font-label-md text-[11px] text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full">
-                        {period}
-                      </span>
-                      <span className="font-label-md text-[11px] text-outline flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px]">
-                          location_on
-                        </span>
-                        {location}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="font-body-md text-body-md text-secondary dark:text-on-surface-variant mb-4">
-                    {description}
+                <div>
+                  <p className="text-subheading font-medium text-white">
+                    {degree}
                   </p>
-
-                  <ul className="space-y-2">
-                    {highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <span className="material-symbols-outlined text-primary text-[16px] mt-0.5 shrink-0">
-                          check_circle
-                        </span>
-                        <span className="font-body-md text-[14px] text-on-surface-variant">
-                          {h}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="mt-1 text-body text-fog">{institution}</p>
                 </div>
-              </Reveal>
+                <p className="text-body-sm text-ash md:text-right">
+                  {period} · {location}
+                  {description && (
+                    <>
+                      <br className="hidden md:block" />
+                      <span className="md:hidden"> · </span>
+                      {description}
+                    </>
+                  )}
+                </p>
+              </li>
             ),
           )}
-        </div>
+        </ul>
       </div>
     </section>
   );
