@@ -1,103 +1,206 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Icon from "@/components/ui/Icon";
-import { button, container } from "@/components/ui/styles";
+import { button } from "@/components/ui/styles";
+import { gsap, useGSAP, fullMotion } from "@/lib/gsap";
+import { setScrollLocked } from "@/components/motion/SmoothScroll";
 import { personal } from "@/data/personal";
+import { socialLinks } from "@/data/social";
 
 const navLinks = [
   { href: "/#work", label: "Work" },
+  { href: "/#approach", label: "Approach" },
   { href: "/#experience", label: "Experience" },
-  { href: "/#stack", label: "Stack" },
   { href: "/#contact", label: "Contact" },
 ];
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+// The header sits over every section, so it takes the colour of the
+// section under its top edge.
+function useThemeUnderHeader() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const probe = () => {
+      const el = document
+        .elementsFromPoint(window.innerWidth / 2, 32)
+        .find((n) => n instanceof HTMLElement && n.dataset.theme);
+      const next = (el as HTMLElement | undefined)?.dataset.theme;
+      setTheme(next === "light" ? "light" : "dark");
+    };
+    probe();
+    window.addEventListener("scroll", probe, { passive: true });
+    window.addEventListener("resize", probe);
+    return () => {
+      window.removeEventListener("scroll", probe);
+      window.removeEventListener("resize", probe);
+    };
+  }, [pathname]);
+
+  return theme;
+}
+
+function Dots({ open }: { open: boolean }) {
+  return (
+    <span aria-hidden="true" data-open={open} className="menu-dots">
+      <span />
+      <span />
+      <span />
+      <span />
+    </span>
+  );
+}
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+  const theme = useThemeUnderHeader();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setCompact(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the menu on navigation.
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpen(false);
+  }
+
+  useEffect(() => {
+    setScrollLocked(open);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(fullMotion, () => {
+        if (!open) return;
+        gsap.from("[data-menu-item]", {
+          yPercent: 110,
+          duration: 0.9,
+          ease: "expo.out",
+          stagger: 0.06,
+          delay: 0.15,
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: menuRef, dependencies: [open] },
+  );
+
+  const ink = open || theme === "dark" ? "text-white" : "text-ink";
+
   return (
-    <nav
-      className={`sticky top-0 z-40 bg-void transition-shadow duration-300 ${
-        scrolled ? "shadow-fade" : ""
-      }`}
-    >
-      <div className={`${container} relative flex h-15.5 items-center justify-between`}>
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <div className="flex items-center justify-between px-6 py-5 md:px-8">
         <Link
           href="/"
-          className="text-[17px] font-bold tracking-[-0.02em] text-white"
+          aria-label={`${personal.name}, home`}
+          className={`pointer-events-auto flex items-center gap-2 text-[18px] font-semibold tracking-[-0.04em] transition-colors duration-300 ${ink}`}
         >
-          ryanffirdaus
+          <span aria-hidden="true" className="chamfer chamfer-sm h-3.5 w-3.5 bg-neon [--cut:4px]" />
+          <span>R</span>
+          <span
+            className={`-ml-2 inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-700 ease-out-expo ${
+              compact && !open ? "max-w-0 opacity-0" : "max-w-40 opacity-100"
+            }`}
+          >
+            yan
+          </span>
+          <span>F</span>
+          <span
+            className={`-ml-2 inline-block overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-700 ease-out-expo ${
+              compact && !open ? "max-w-0 opacity-0" : "max-w-40 opacity-100"
+            }`}
+          >
+            irdaus
+          </span>
         </Link>
 
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-          {navLinks.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className="text-[15px] text-white/80 transition-colors hover:text-white"
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-5">
-          <a
-            href={personal.resumeHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-[15px] text-white/80 transition-colors hover:text-white sm:inline"
-          >
-            Résumé
-          </a>
-          <a
-            href={personal.social.email}
-            className={`${button.primary} hidden py-2! px-5! sm:inline-flex`}
-          >
-            Get in touch
-          </a>
-          <button
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
-            className={`${button.tool} md:hidden`}
-          >
-            <Icon name={menuOpen ? "close" : "menu"} size={18} />
-          </button>
-        </div>
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls="site-menu"
+          onClick={() => setOpen((v) => !v)}
+          className={`pointer-events-auto flex items-center gap-3 font-mono text-[12px] tracking-[0.04em] uppercase transition-colors duration-300 ${ink}`}
+        >
+          <span>{open ? "Close" : "Menu"}</span>
+          <Dots open={open} />
+        </button>
       </div>
 
-      {menuOpen && (
-        <div className="bg-overlay md:hidden">
-          <ul className={`${container} space-y-1 py-4`}>
-            {[
-              ...navLinks,
-              { href: personal.resumeHref, label: "Résumé" },
-              { href: personal.social.email, label: "Get in touch" },
-            ].map(({ href, label }) => (
-              <li key={label}>
-                <Link
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-subheading text-white"
+      <div
+        id="site-menu"
+        ref={menuRef}
+        hidden={!open}
+        className="pointer-events-auto fixed inset-0 -z-10 overflow-y-auto bg-ink"
+        data-lenis-prevent
+      >
+        <div className="mx-auto flex min-h-full max-w-page flex-col justify-between px-6 pt-28 pb-10 md:px-8">
+          <nav aria-label="Main">
+            <ul className="space-y-1">
+              {navLinks.map(({ href, label }, i) => (
+                <li key={href} className="overflow-hidden">
+                  <Link
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    data-menu-item
+                    className="group flex items-baseline gap-4 py-1 text-[13vw] leading-none font-semibold tracking-[-0.055em] text-white transition-colors hover:text-neon md:text-[7vw]"
+                  >
+                    <span className="font-mono text-body-sm tracking-normal text-ash">
+                      0{i + 1}
+                    </span>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="mt-16 flex flex-col gap-8 border-t border-steel pt-8 md:flex-row md:items-end md:justify-between">
+            <ul className="flex flex-wrap gap-x-8 gap-y-3 text-body text-fog">
+              {socialLinks.map(({ href, label }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target={href.startsWith("mailto") ? undefined : "_blank"}
+                    rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    className="transition-colors hover:text-white"
+                  >
+                    {label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href={personal.resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-white"
                 >
-                  {label}
-                </Link>
+                  Résumé
+                </a>
               </li>
-            ))}
-          </ul>
+            </ul>
+            <a href={personal.social.email} className={button.primary}>
+              Get in touch <Icon name="arrow-right" size={14} />
+            </a>
+          </div>
         </div>
-      )}
-    </nav>
+      </div>
+    </header>
   );
 }
