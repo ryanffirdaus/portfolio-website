@@ -61,15 +61,12 @@ export default function ProjectsSection() {
                   {metrics.length > 0 && (
                     <dl className="mt-8 grid grid-cols-3 gap-6">
                       {metrics.map(({ prefix, target, suffix, label }) => (
-                        <div key={label}>
-                          <dt className="sr-only">{label}</dt>
+                        <div key={label} className="flex flex-col-reverse">
+                          <dt className="mt-1 text-body-sm text-ash">{label}</dt>
                           <dd className="text-heading-sm font-bold text-white">
                             {prefix}
                             {target}
                             {suffix}
-                          </dd>
-                          <dd className="mt-1 text-body-sm text-ash">
-                            {label}
                           </dd>
                         </div>
                       ))}
