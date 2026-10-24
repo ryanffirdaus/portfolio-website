@@ -49,11 +49,11 @@ function CopyField({ label, value }: { label: string; value: string }) {
 
 export default function LiveDemoSection({ liveUrl, credentials }: Props) {
   return (
-    <section className="rounded-card bg-panel p-6 md:p-10">
+    <section className="chamfer chamfer-lg dot-grid bg-panel p-6 md:p-10">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
           <Badge tone="live">Live demo</Badge>
-          <h2 className="mt-4 text-heading-sm font-bold text-white">
+          <h2 className="mt-4 text-heading-sm font-semibold text-white">
             Try it yourself
           </h2>
           <p className="mt-3 text-body text-fog">
@@ -75,7 +75,7 @@ export default function LiveDemoSection({ liveUrl, credentials }: Props) {
       {credentials && credentials.length > 0 && (
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {credentials.map(({ role, email, password }) => (
-            <div key={role} className="space-y-2 rounded-chip bg-raised p-4">
+            <div key={role} className="chamfer space-y-2 bg-raised p-4">
               <p className="pb-1 text-body-sm font-medium text-white">{role}</p>
               <CopyField label="Email" value={email} />
               <CopyField label="Password" value={password} />

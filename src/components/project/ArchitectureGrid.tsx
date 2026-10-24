@@ -12,14 +12,16 @@ export default function ArchitectureGrid({ cards }: Props) {
 
       <div className="mt-10 grid gap-3 md:grid-cols-3">
         {cards.map(({ title, description }, idx) => (
-          <div key={title} className="rounded-card bg-panel p-6 md:p-8">
-            <p className="text-body-sm font-medium text-muted tabular-nums">
+          <div key={title} className="chamfer chamfer-lg chamfer-frame bg-steel [--frame-cut:28px]">
+            <div className="chamfer dot-grid h-full bg-ink p-6 md:p-8">
+            <p className="font-mono text-body text-neon">
               {String(idx + 1).padStart(2, "0")}
             </p>
-            <h3 className="mt-6 text-heading-sm font-bold text-white">
+            <h3 className="mt-6 text-heading-sm font-semibold text-white">
               {title}
             </h3>
             <p className="mt-3 text-body text-fog">{description}</p>
+            </div>
           </div>
         ))}
       </div>

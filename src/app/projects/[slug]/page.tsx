@@ -11,6 +11,7 @@ import Gallery from "@/components/project/Gallery";
 import ArchitectureGrid from "@/components/project/ArchitectureGrid";
 import KeyResults from "@/components/project/KeyResults";
 import TechStackSection from "@/components/project/TechStackSection";
+import { Reveal } from "@/components/motion/Reveal";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -57,12 +58,12 @@ export default async function ProjectPage({ params }: Props) {
   const nextProject = projectSummaries[(index + 1) % projectSummaries.length];
 
   return (
-    <main className={`${container} pt-10 pb-12`}>
+    <main data-theme="dark" className={`${container} pt-32 pb-40`}>
       <Link href="/#work" className={`${button.ghost} text-fog hover:text-white`}>
         <Icon name="arrow-left" /> All work
       </Link>
 
-      <header className="mt-12 max-w-240">
+      <Reveal as="header" stagger className="mt-12 max-w-260">
         <div className="flex flex-wrap gap-2">
           {project.liveUrl && <Badge tone="live">Live demo</Badge>}
           {project.sourceUrl && <Badge tone="info">Open source</Badge>}
@@ -70,10 +71,10 @@ export default async function ProjectPage({ params }: Props) {
             <Badge key={tag}>{tag}</Badge>
           ))}
         </div>
-        <h1 className="mt-6 text-heading-lg font-bold text-white md:text-display">
+        <h1 className="mt-6 text-[16vw] leading-[0.92] font-semibold tracking-[-0.045em] text-white md:text-[112px]">
           {project.title}
         </h1>
-        <p className="mt-6 text-subheading text-fog">{project.description}</p>
+        <p className="mt-8 max-w-3xl text-body text-fog md:text-subheading">{project.description}</p>
         {(project.liveUrl || project.downloadUrl || project.sourceUrl) && (
           <div className="mt-8 flex flex-wrap gap-3">
             {project.liveUrl && (
@@ -112,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
             )}
           </div>
         )}
-      </header>
+      </Reveal>
 
       <div className="mt-16 space-y-24">
         <Gallery
@@ -121,7 +122,7 @@ export default async function ProjectPage({ params }: Props) {
         />
         <KeyResults results={project.keyResults} />
 
-        <section className="grid gap-6 md:grid-cols-12">
+        <Reveal as="section" className="grid gap-6 md:grid-cols-12">
           <div className="md:col-span-4">
             <p className={eyebrow}>The problem</p>
           </div>
@@ -132,7 +133,7 @@ export default async function ProjectPage({ params }: Props) {
               </p>
             ))}
           </div>
-        </section>
+        </Reveal>
 
         <ArchitectureGrid cards={project.architecture.cards} />
         <TechStackSection items={project.techStack} />
@@ -146,15 +147,15 @@ export default async function ProjectPage({ params }: Props) {
         {nextProject.slug !== slug && (
           <Link
             href={`/projects/${nextProject.slug}`}
-            className="group flex items-center justify-between gap-6 rounded-card bg-panel p-6 transition-colors hover:bg-raised md:p-10"
+            className="group flex items-center justify-between gap-6 border-t border-steel pt-8 transition-colors"
           >
             <span>
               <span className={`${eyebrow} block`}>Next project</span>
-              <span className="mt-2 block text-heading-sm font-bold text-white md:text-heading">
+              <span className="mt-2 block text-[10vw] leading-none font-semibold tracking-[-0.04em] text-white md:text-[64px]">
                 {nextProject.title}
               </span>
             </span>
-            <Icon name="arrow-right" size={24} className="text-signal" />
+            <Icon name="arrow-right" size={32} className="text-neon transition-transform duration-500 ease-out-expo group-hover:translate-x-2" />
           </Link>
         )}
       </div>

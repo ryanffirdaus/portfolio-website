@@ -146,7 +146,7 @@ export default function Gallery({ images, mobile = false }: Props) {
         <button
           type="button"
           aria-label="Open image full screen"
-          className="group relative block w-full cursor-zoom-in overflow-hidden rounded-card bg-panel"
+          className="chamfer chamfer-lg dot-grid group relative block w-full cursor-zoom-in overflow-hidden bg-panel"
           onClick={() => setLightbox(true)}
         >
           <Image

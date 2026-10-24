@@ -12,8 +12,8 @@ export default function TechStackSection({ items }: Props) {
 
       <ol className="mt-10 space-y-10">
         {items.map(({ number, title, description }) => (
-          <li key={title} className="grid gap-2 md:grid-cols-12 md:gap-6">
-            <span className="text-body-sm font-medium text-muted tabular-nums md:col-span-1 md:pt-0.5">
+          <li key={title} className="grid gap-2 border-t border-steel pt-6 md:grid-cols-12 md:gap-6">
+            <span className="font-mono text-body text-neon md:col-span-1">
               {number}
             </span>
             <h3 className="text-subheading font-medium text-white md:col-span-3">
