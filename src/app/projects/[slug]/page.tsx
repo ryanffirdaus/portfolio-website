@@ -6,7 +6,6 @@ import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
 import { button, container, eyebrow } from "@/components/ui/styles";
-import LiveDemoSection from "@/components/project/LiveDemoSection";
 import Gallery from "@/components/project/Gallery";
 import ArchitectureGrid from "@/components/project/ArchitectureGrid";
 import KeyResults from "@/components/project/KeyResults";
@@ -65,7 +64,6 @@ export default async function ProjectPage({ params }: Props) {
 
       <Reveal as="header" stagger className="mt-12 max-w-260">
         <div className="flex flex-wrap gap-2">
-          {project.liveUrl && <Badge tone="live">Live demo</Badge>}
           {project.sourceUrl && <Badge tone="info">Open source</Badge>}
           {project.tags.map((tag) => (
             <Badge key={tag}>{tag}</Badge>
@@ -75,24 +73,14 @@ export default async function ProjectPage({ params }: Props) {
           {project.title}
         </h1>
         <p className="mt-8 max-w-3xl text-body text-fog md:text-subheading">{project.description}</p>
-        {(project.liveUrl || project.downloadUrl || project.sourceUrl) && (
+        {(project.downloadUrl || project.sourceUrl) && (
           <div className="mt-8 flex flex-wrap gap-3">
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={button.primary}
-              >
-                Open the demo <Icon name="arrow-up-right" />
-              </a>
-            )}
             {project.downloadUrl && (
               <a
                 href={project.downloadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={project.liveUrl ? button.outline : button.primary}
+                className={button.primary}
               >
                 Download the APK <Icon name="arrow-up-right" />
               </a>
@@ -102,11 +90,7 @@ export default async function ProjectPage({ params }: Props) {
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={
-                  project.liveUrl || project.downloadUrl
-                    ? button.outline
-                    : button.primary
-                }
+                className={project.downloadUrl ? button.outline : button.primary}
               >
                 View source on GitHub <Icon name="arrow-up-right" />
               </a>
@@ -137,12 +121,6 @@ export default async function ProjectPage({ params }: Props) {
 
         <ArchitectureGrid cards={project.architecture.cards} />
         <TechStackSection items={project.techStack} />
-        {project.liveUrl && (
-          <LiveDemoSection
-            liveUrl={project.liveUrl}
-            credentials={project.demoCredentials}
-          />
-        )}
 
         {nextProject.slug !== slug && (
           <Link

@@ -49,27 +49,17 @@ export interface GalleryImage {
   alt: string;
 }
 
-export interface DemoCredential {
-  role: string;
-  email: string;
-  password: string;
-}
-
 export interface ProjectDetail {
   slug: string;
   title: string;
   tags: string[];
   description: string;
-  /** Optional link to a live/production deployment of the project */
-  liveUrl?: string;
   /** Optional link to the public source repository */
   sourceUrl?: string;
   /** Optional link to downloadable builds (e.g. GitHub Releases) */
   downloadUrl?: string;
   /** "mobile" = portrait phone screenshots in the gallery */
   platform?: "web" | "mobile";
-  /** Optional demo login credentials shown on the project page */
-  demoCredentials?: DemoCredential[];
   heroImage: { src: string; alt: string };
   gallery: GalleryImage[];
   challenge: string[];
