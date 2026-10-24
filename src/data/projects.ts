@@ -9,7 +9,7 @@ export const projectSummaries: ProjectSummary[] = [
     title: "B4Due",
     tags: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod"],
     description:
-      "An open-source Android app that reminds you before bills and subscriptions are due. No account and no server: bills and payments stay on the phone, and the only network request fetches exchange rates for bills priced in foreign currencies.",
+      "An open-source Android app that tells you before a bill is due. You choose your main currency from 31 currencies. Each bill is a coloured card in a wallet. The app counts loan payments, warns you when you go over your monthly budget, and has a home-screen widget. It has no account and no server, so your bills stay on your phone.",
     image: {
       src: "/images/projects/b4due/b4due_cover.webp",
       alt: "B4Due home, statistics, and dark-mode home screens",
@@ -48,7 +48,7 @@ const projectDetails: Record<string, ProjectDetail> = {
     title: "B4Due",
     tags: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod"],
     description:
-      "B4Due is a bill and subscription reminder for Android, built for Indonesian households: electricity, BPJS, vehicle tax, instalments, streaming, and subscriptions billed in dollars. It reminds you 7, 3 and 1 day before a bill is due and on the day itself, and you can mark the bill as paid straight from the notification. A calendar view and spending statistics show where the money goes. There is no account and no server, so it costs nothing to run for anyone. The interface ships in Bahasa Indonesia and English, in light and dark mode.",
+      "B4Due is an Android app that tells you before a bill is due. It shows electricity, insurance, vehicle tax, loans, streaming, and subscriptions. You choose your main currency from 31 currencies. You can enter each bill in its own currency, and the app shows the amount in your main currency. The app reminds you 7 days, 3 days, and 1 day before the due date, and on the due date. You can mark a bill as paid from the reminder. Each bill is a coloured card in a wallet, and the most urgent card is at the front. For a loan, the app counts the payments and stops after the last payment. If you set a monthly budget, the home page shows a warning when your bills are more than the budget. A widget on the home screen shows how much you must pay this month and the next bill. The app has no account and no server, so it is free for all users. It is in English and Indonesian, and it has a light theme and a dark theme.",
     sourceUrl: "https://github.com/ryanffirdaus/b-4-due",
     downloadUrl: "https://github.com/ryanffirdaus/b-4-due/releases",
     platform: "mobile",
@@ -74,71 +74,83 @@ const projectDetails: Record<string, ProjectDetail> = {
       { src: "/images/projects/b4due/home_dark.webp", alt: "Home dark mode" },
     ],
     challenge: [
-      "Bill reminders only matter if they fire. Without a server there is no push service to fall back on, so every reminder has to be scheduled on the device itself, survive reboots, and get past the aggressive battery savers on Xiaomi, OPPO, vivo and similar phones. The \"Mark as paid\" button on a notification also runs while the app is closed, in a separate isolate, and must never record the same payment twice. And because many subscriptions are billed in dollars, the app needs current exchange rates without giving up its offline, account-free design.",
-      "Scheduling is a pure function: bills, settings and the current time go in, and a list of notifications with deterministic IDs comes out. A sync step reconciles the OS queue against that list, so re-running it is idempotent and can never duplicate a reminder. Notification actions share one Drift database server across isolates and pay a bill inside a single idempotent transaction. Recurring dates are civil dates on an anchor day, so a bill due on the 31st stays on the 31st after February. Exchange rates are an anonymous request to the European Central Bank's reference rates, cached locally, so reminders, totals and statistics keep working in rupiah when the phone is offline.",
+      "A reminder app is only useful if each reminder comes on time. B4Due has no server, so the phone must schedule every reminder. The reminders must stay after the phone restarts. They must also get past the battery savers on Xiaomi, OPPO, vivo, and other phones. The Paid button on a reminder works when the app is closed. It must never record the same payment two times. People pay bills in many currencies, so the app also needs current exchange rates. It must get them without an account and continue to work offline.",
+      "One function makes the full list of reminders from the bills, the settings, and the time. Each reminder gets a fixed ID. The app compares this list with the reminders on the phone and changes only the differences, so a reminder never shows two times. A tap on a reminder uses the same database as the app and records a payment in one safe step. Each bill keeps its own price, so a change of the main currency never loses an amount. The app keeps the exchange rates on the phone, so the totals stay correct offline.",
     ],
     architecture: {
       cards: [
         {
-          title: "Pure Scheduling Planner",
+          title: "Reminders That Come on Time",
           description:
-            "planNotifications() turns bills, settings and the current time into reminders keyed by bill, due date and offset, hashed to stable IDs. ReminderSync cancels what is no longer planned and reschedules the rest on launch, resume, every data change, restore, and a 12-hourly WorkManager task.",
+            "Your phone keeps the schedule, not a server. The app does not need the internet for reminders. After a restart, an update, or a change to a bill, the app makes the schedule again. You never get the same reminder two times.",
         },
         {
-          title: "Background Isolate Actions",
+          title: "Pay From the Reminder",
           description:
-            "Notification actions run with the app closed. All isolates connect to one shared Drift database server, and paying a bill is a single write-locked transaction that ignores double taps, duplicate deliveries, and stale notifications for an earlier period.",
+            "Tap Paid on the reminder. You do not have to open the app. The app records the payment and moves the bill to the next due date. If you tap two times, the app records the payment only one time.",
         },
         {
-          title: "Offline First, Private by Default",
+          title: "Your Data Stays With You",
           description:
-            "No account, backend or analytics. The only network call is a GET for exchange rates that carries no user data, with a timeout, size cap and local cache. Backups are JSON files the user keeps in their own storage, and CI rejects any APK that asks for a permission outside an allowlist.",
+            "There is no account, no server, and no ads. All bills and payments stay on your phone. The app uses the internet only to get exchange rates, and it sends no personal data. You keep your backups in your own storage.",
         },
       ],
     },
     keyResults: [
-      { target: 0, label: "Accounts or Servers" },
-      { target: 148, label: "Automated Tests" },
-      { target: 16, label: "Foreign Currencies" },
-      { target: 23, label: "Bill Templates" },
-      { target: 2, label: "Languages (ID, EN)" },
+      { prefix: "$", target: 0, label: "Cost to use. No account, no ads" },
+      { target: 31, label: "Currencies you can use" },
+      { target: 4, label: "Reminders before each due date" },
+      { target: 1, label: "Tap to mark a bill as paid" },
+      { target: 291, label: "Automated tests on each change" },
     ],
     techStack: [
       {
         number: "01",
         title: "Flutter + Riverpod",
         description:
-          "A feature-first Flutter app with Riverpod for state and a five-tab go_router shell. Domain code has no Flutter imports, so date rules and the scheduler are unit-tested without a device.",
+          "The app uses Flutter, with Riverpod for state and go_router for the five tabs. The business rules do not use Flutter. Thus, tests can check dates and reminders without a phone.",
       },
       {
         number: "02",
-        title: "Drift / SQLite",
+        title: "Own UI Kit",
         description:
-          "Local SQLite through Drift with UUID keys, soft deletes, and step-by-step migrations tested from every earlier schema version with real rows. SQLite is compiled from a vendored amalgamation so release builds download no prebuilt binaries, as F-Droid requires.",
+          "The app uses no Material or Cupertino widgets. It has its own wallet cards, buttons, text fields, date and time pickers, sheets, and messages. Tests check that no Material import comes back. Tests also check the colour contrast (WCAG AA) and compare screenshots in the light theme and the dark theme.",
       },
       {
         number: "03",
-        title: "Local Notifications",
+        title: "Drift / SQLite",
         description:
-          "flutter_local_notifications with exact alarms schedules a rolling horizon of reminders (120 days on Android, 64 notifications on iOS). Per-brand battery guidance, a test-notification button, and optional calendar alarms cover phones that kill background work.",
+          "Drift keeps the data in SQLite on the phone. Each change to the database structure has a migration. Tests check each migration from every earlier version with real data. The build makes SQLite from its source code, as F-Droid requires.",
       },
       {
         number: "04",
-        title: "Background Isolates",
+        title: "Local Notifications",
         description:
-          "Notification actions and WorkManager tasks run in their own isolates but connect to one shared Drift server, so a payment made from the notification updates the open home screen immediately. Tests run six simultaneous deliveries of the same action against one SQLite file.",
+          "Exact alarms schedule the reminders for the next 120 days on Android. A guide for each phone brand helps users stop battery savers. A test button and optional calendar alarms give more safety.",
       },
       {
         number: "05",
-        title: "Exchange Rates",
+        title: "Home-Screen Widget",
         description:
-          "Bills can be priced in 16 foreign currencies. Daily ECB reference rates come from Frankfurter, are cached in SQLite and refreshed every 12 hours, and each foreign bill keeps its original amount so the rupiah estimate is recomputed after every refresh.",
+          "A 4x2 Android widget shows the amount to pay this month, a bar for the paid amount, and the most urgent bill. A tap opens that bill. Dart calculates the text, and the widget updates each time the reminders change. The widget needs no more permissions.",
       },
       {
         number: "06",
+        title: "Background Isolates",
+        description:
+          "Reminder actions and background tasks run in separate isolates. All of them use one shared database. Thus, a payment from a reminder shows on the open home page immediately. A test sends the same action six times at the same time and checks for one payment.",
+      },
+      {
+        number: "07",
+        title: "Currencies and Exchange Rates",
+        description:
+          "You choose a main currency from the 31 currencies of the European Central Bank. Each bill can use its own currency. The app gets the daily rates, keeps them on the phone, and updates them every 12 hours. Each bill keeps its own price, and each payment keeps its currency. Thus, a change of the main currency never loses an amount.",
+      },
+      {
+        number: "08",
         title: "GitHub Actions",
         description:
-          "CI runs analyze, unit, widget, migration and golden tests in light and dark mode, then audits the built APK's permissions. release-please cuts semver releases from Conventional Commits, every green build on main ships a signed nightly APK, and users can auto-update through Obtainium.",
+          "Each change runs the analysis, the unit tests, the migration tests, and the screenshot tests. Then CI builds the APK and checks its permissions. Each green build on main gives a signed test version, and users can update with Obtainium.",
       },
     ],
   },
