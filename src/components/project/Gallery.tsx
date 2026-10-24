@@ -51,18 +51,6 @@ function attachDragScroll(el: HTMLDivElement, didDrag: { current: boolean }) {
   };
 }
 
-function getImageLabel(src: string) {
-  const name =
-    src
-      .split("/")
-      .pop()
-      ?.replace(/\.[^.]+$/, "") ?? "";
-  return name
-    .split("_")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
 export default function Gallery({ images, mobile = false }: Props) {
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
@@ -184,7 +172,7 @@ export default function Gallery({ images, mobile = false }: Props) {
               {String(active + 1).padStart(2, "0")}
             </span>
             <span className="text-muted"> / {String(images.length).padStart(2, "0")}</span>
-            <span className="ml-3">{getImageLabel(images[active].src)}</span>
+            <span className="ml-3">{images[active].alt}</span>
           </p>
 
           <div className="flex max-w-full items-center gap-2">
@@ -239,7 +227,7 @@ export default function Gallery({ images, mobile = false }: Props) {
             onClick={(e) => e.stopPropagation()}
           >
             <span className="text-body-sm text-fog tabular-nums">
-              {active + 1} / {images.length} · {getImageLabel(images[active].src)}
+              {active + 1} / {images.length} · {images[active].alt}
             </span>
             <button
               aria-label="Close"
