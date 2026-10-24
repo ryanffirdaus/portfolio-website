@@ -4,30 +4,45 @@
   /* Reset Tailwind's palette — only the tokens below exist */
   --color-*: initial;
 
-  /* Surfaces: void → panel → raised → overlay */
-  --color-void: #0e1012;
-  --color-panel: #15171b;
-  --color-raised: #1c1f24;
-  --color-overlay: #23262d;
+  /* Two grounds: bone (light sections) and press black (dark sections) */
+  --color-paper: #fafffa;
+  --color-paper-deep: #eef4ee;
+  --color-ink: #121613;
+  --color-slate: #232924;
 
-  /* Neutrals */
-  --color-steel: #333943;
-  --color-pewter: #444d5a;
-  --color-muted: #566171;
-  --color-ash: #8b96aa;
-  --color-fog: #a0aaba;
-  --color-silver: #bbc2ce;
-  --color-cloud: #d5dae2;
-  --color-white: #ffffff;
+  /* Dark scale, used inside ink sections and project pages */
+  --color-void: #121613;
+  --color-panel: #1a1f1b;
+  --color-raised: #232924;
+  --color-overlay: #2b322c;
+  --color-steel: #2f3730;
+  --color-pewter: #435046;
+  --color-muted: #6b7b6e;
+  --color-ash: #93a396;
+  --color-fog: #b4c0b5;
+  --color-silver: #c8d2c8;
+  --color-cloud: #dfe7df;
+  --color-white: #fafffa;
   --color-black: #000000;
 
-  /* The one accent, plus label-scale variants */
-  --color-signal: #007afc;
-  --color-signal-deep: #0062ca;
-  --color-map-green: #228a56;
+  /* Text and hairlines on bone */
+  --color-graphite: #516254;
+  --color-line: #d5ddd5;
 
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Supporting greens: decoration only, never a CTA */
+  --color-moss: #93b799;
+  --color-echo: #c4e4c9;
+
+  /* The one accent */
+  --color-neon: #2bee4b;
+  --color-neon-deep: #22c93e;
+  --color-signal: #2bee4b;
+  --color-signal-deep: #22c93e;
+  --color-map-green: #2bee4b;
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Type scale */
   --text-caption: 10px;
@@ -40,30 +55,36 @@
   --text-subheading: 18px;
   --text-subheading--line-height: 1.4;
   --text-heading-sm: 24px;
-  --text-heading-sm--line-height: 1.33;
+  --text-heading-sm--line-height: 1.2;
   --text-heading: 32px;
-  --text-heading--line-height: 1.25;
-  --text-heading--letter-spacing: -0.32px;
-  --text-heading-lg: 44px;
-  --text-heading-lg--line-height: 1.14;
-  --text-heading-lg--letter-spacing: -0.88px;
-  --text-display: 68px;
-  --text-display--line-height: 1;
-  --text-display--letter-spacing: -1.36px;
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.64px;
+  --text-heading-lg: 48px;
+  --text-heading-lg--line-height: 1.02;
+  --text-heading-lg--letter-spacing: -1.44px;
+  --text-display: 72px;
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -2.88px;
 
-  /* Radii: pill / card / chip / input / badge */
-  --radius-card: 24px;
-  --radius-chip: 12px;
-  --radius-input: 6px;
-  --radius-badge: 4px;
+  /* Radii, for the few round things left. Most shapes are chamfered. */
+  --radius-card: 14px;
+  --radius-chip: 10px;
+  --radius-input: 5px;
+  --radius-badge: 5px;
 
-  --shadow-fade: rgb(14 16 18) 0 0 100px 50px;
+  /* Elevation lives only on the green button */
+  --shadow-neon: rgba(16, 94, 29, 0.45) 1px 8px 20px 0px;
+  --shadow-neon-soft: rgba(18, 146, 39, 0.25) 1px 8px 20px 0px;
 
-  --container-page: 1344px;
+  --font-times: Times, "Times New Roman", serif;
+
+  --container-page: 1400px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
-  background: var(--color-void);
+  background: var(--color-ink);
   color-scheme: dark;
 }
 
@@ -72,23 +93,101 @@ body {
 }
 
 ::selection {
-  background: var(--color-signal);
-  color: var(--color-white);
+  background: var(--color-neon);
+  color: var(--color-ink);
 }
 
-/* Media dissolves into the page at its bottom edge.
-   Drawn on ::after so it sits above <img> children. */
-.vignette {
-  position: relative;
-  isolation: isolate;
+/* Lenis owns smooth scrolling; native smooth scroll would fight it. */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
-.vignette::after {
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Hidden before the entrance animation runs. The `js` class is set by an
+   inline script, so the hero stays readable without JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal-line] {
+    transform: translateY(110%);
+  }
+  .js [data-reveal-chip] {
+    clip-path: inset(0 50% 0 50%);
+  }
+}
+
+/* A green block caret at the end of a typed line, like a terminal. */
+.caret::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: rgb(14 16 18) 0 -175px 175px -75px inset;
-  pointer-events: none;
+  display: inline-block;
+  width: 0.62em;
+  height: 0.09em;
+  margin-left: 0.08em;
+  vertical-align: -0.04em;
+  background: var(--color-neon);
+}
+
+/* The menu button: four dots that turn into a cross. */
+.menu-dots {
+  display: grid;
+  grid-template-columns: repeat(2, 5px);
+  gap: 4px;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.menu-dots > span {
+  width: 5px;
+  height: 5px;
+  background: var(--color-neon);
+}
+.menu-dots[data-open="true"] {
+  transform: rotate(45deg);
+}
+
+/* The display serif, with its soft and "wonky" axes turned up. */
+.serif-soft {
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+
+/* Circuit-board corners: the top-left and bottom-right are cut. */
+.chamfer {
+  --cut: 14px;
+  clip-path: polygon(
+    var(--cut) 0,
+    100% 0,
+    100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%,
+    0 100%,
+    0 var(--cut)
+  );
+}
+.chamfer-sm {
+  --cut: 8px;
+}
+.chamfer-lg {
+  --cut: 28px;
+}
+
+/* A hairline frame that follows the chamfer: the outer box draws the line,
+   the inner box covers all but 1px of it. */
+.chamfer-frame {
+  padding: 1px;
+}
+.chamfer-frame > * {
+  --cut: calc(var(--frame-cut, 14px) - 0.5px);
+}
+
+/* Dot grid behind dark surfaces, like a PCB. */
+.dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(250 255 250 / 0.07) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -97,10 +196,4 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
 }

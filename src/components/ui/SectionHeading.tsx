@@ -18,7 +18,7 @@ export default function SectionHeading({
       className={`space-y-3 ${align === "center" ? "text-center" : ""} ${className}`}
     >
       <p className={eyebrowClass}>{eyebrow}</p>
-      <h2 className="text-heading font-bold text-white md:text-heading-lg">
+      <h2 className="text-[10vw] leading-[0.95] font-semibold tracking-[-0.05em] text-white md:text-[56px]">
         {children}
       </h2>
     </div>

@@ -1,12 +1,12 @@
 interface BadgeProps {
   children: React.ReactNode;
-  /** "live" = map-green status, "info" = deep signal, "neutral" = raised surface */
+  /** "live" = neon status, "info" = neon hairline, "neutral" = raised surface */
   tone?: "live" | "info" | "neutral";
 }
 
 const tones = {
-  live: "bg-map-green text-white",
-  info: "bg-signal-deep text-white",
+  live: "bg-neon text-ink",
+  info: "border border-neon/50 text-neon",
   neutral: "bg-raised text-fog",
 };
 

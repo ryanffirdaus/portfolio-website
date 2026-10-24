@@ -1,17 +1,32 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Fraunces, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ScrollToTop from "@/components/ui/ScrollToTop";
+import SmoothScroll from "@/components/motion/SmoothScroll";
 import { personal } from "@/data/personal";
 import { SITE_URL, SITE_KEYWORDS } from "@/data/site";
 
-const dmSans = DM_Sans({
+// A characterful grotesque for UI and headlines, a soft display serif for
+// numbers and accents, and a mono face for labels and the "code" letters.
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-dm-sans",
+  axes: ["opsz", "wdth"],
+  variable: "--font-bricolage",
 });
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "WONK", "opsz"],
+  variable: "--font-fraunces",
+});
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+});
+
+// Marks the page as scripted before first paint, so entrance animations can
+// hide their start state without hiding content from no-JS readers.
+const jsFlag = `document.documentElement.classList.add("js")`;
 
 const title = `${personal.name} | ${personal.title}`;
 
@@ -59,12 +74,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <body className="flex min-h-screen flex-col bg-void font-sans text-body text-fog antialiased">
+    <html
+      lang="en"
+      className={`${bricolage.variable} ${fraunces.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: jsFlag }} />
+      </head>
+      <body className="flex min-h-screen flex-col bg-ink font-sans text-body text-fog antialiased">
+        <SmoothScroll />
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
-        <ScrollToTop />
       </body>
     </html>
   );

@@ -8,6 +8,13 @@ const paths = {
   copy: "M9 9h10v10H9zM5 15V5h10",
   check: "M5 12.5l4.5 4.5L19 7.5",
   expand: "M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5",
+  server: "M4 4.5h16v6H4zM4 13.5h16v6H4zM8 7.5h.01M8 16.5h.01M12 7.5h4M12 16.5h4",
+  chart: "M4 19.5h16M7 16v-4M12 16V6.5M17 16V10",
+  phone: "M7.5 3h9v18h-9zM11 17.5h2",
+  card: "M3 6h18v12H3zM3 10h18M7 14.5h4",
+  code: "M9 7.5 4.5 12 9 16.5M15 7.5l4.5 4.5-4.5 4.5",
+  layers: "M12 3.5 21 8l-9 4.5L3 8zM3 12.5l9 4.5 9-4.5M3 16.5 12 21l9-4.5",
+  pulse: "M3 12h4l2.5-6 5 12 2.5-6h4",
 } as const;
 
 export type IconName = keyof typeof paths;
