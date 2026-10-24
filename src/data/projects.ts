@@ -33,7 +33,7 @@ export const projectSummaries: ProjectSummary[] = [
     description:
       "Full-stack restaurant management platform with a touch-first POS, kitchen display, and role-based workflows for waiters, kitchen, cashiers, and admins — built on React, Express, and Supabase, with Midtrans-powered online payments.",
     image: {
-      src: "/images/projects/servio/servio_thumbnail.webp",
+      src: "/images/projects/servio/cover.webp",
       alt: "Servio Restaurant Management System",
     },
   },
@@ -300,45 +300,50 @@ const projectDetails: Record<string, ProjectDetail> = {
     tags: ["React", "Express", "Supabase", "Midtrans", "Docker"],
     description:
       "Servio is a full-stack restaurant management system that runs front-of-house and back-of-house operations from a single platform. It coordinates the entire service lifecycle — seating a table, opening an order session, sending tickets to the kitchen, serving, and settling the bill — across dedicated interfaces for admins, waiters, kitchen staff, and cashiers. A React and Vite front end talks to a TypeScript Express API backed by Supabase (PostgreSQL with Row Level Security), with online payments handled through the Midtrans payment gateway and confirmed via webhook.",
-    liveUrl: "https://rms.ryanffirdaus.my.id",
-    demoCredentials: [
-      { role: "Admin", email: "admin@omni.com", password: "admin123" },
-      { role: "Waiter", email: "waiter@omni.com", password: "waiter123" },
-      { role: "Kitchen", email: "chef@omni.com", password: "chef123" },
-      { role: "Cashier", email: "cashier@omni.com", password: "cashier123" },
-    ],
     heroImage: {
-      src: "/images/projects/servio/servio_thumbnail.webp",
+      src: "/images/projects/servio/cover.webp",
       alt: "Servio Restaurant Management System",
     },
     gallery: [
       {
-        src: "/images/projects/servio/dashboard_analytics.webp",
-        alt: "Dashboard & Analytics",
+        src: "/images/projects/servio/dashboard.webp",
+        alt: "Admin overview with table status and the revenue of the day",
       },
       {
-        src: "/images/projects/servio/menu_management.webp",
-        alt: "Menu Management",
+        src: "/images/projects/servio/analytics.webp",
+        alt: "Analytics: revenue, orders by status, and top items",
       },
       {
-        src: "/images/projects/servio/order_management.webp",
-        alt: "Order Management",
+        src: "/images/projects/servio/orders.webp",
+        alt: "Order list with the status of each order",
       },
       {
-        src: "/images/projects/servio/table_floor_plan.webp",
-        alt: "Table & Floor Plan",
+        src: "/images/projects/servio/menu.webp",
+        alt: "Menu management with photos and categories",
       },
       {
-        src: "/images/projects/servio/waiter_order_creation.webp",
-        alt: "Waiter Order Creation",
+        src: "/images/projects/servio/tables_floor.webp",
+        alt: "Floor plan of the restaurant tables",
       },
       {
-        src: "/images/projects/servio/kitchen_display.webp",
-        alt: "Kitchen Display",
+        src: "/images/projects/servio/payments.webp",
+        alt: "Payments by method, with the unpaid orders",
       },
       {
-        src: "/images/projects/servio/point_of_sale.webp",
-        alt: "Point of Sale",
+        src: "/images/projects/servio/employees.webp",
+        alt: "Employee list with roles",
+      },
+      {
+        src: "/images/projects/servio/waiter_tables.webp",
+        alt: "Waiter app: tables and the status of their orders",
+      },
+      {
+        src: "/images/projects/servio/kitchen_board.webp",
+        alt: "Kitchen board: queued, cooking, and ready items",
+      },
+      {
+        src: "/images/projects/servio/cashier_checkout.webp",
+        alt: "Cashier checkout with cash, QRIS, GoPay, and virtual account",
       },
     ],
     challenge: [
