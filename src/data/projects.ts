@@ -20,7 +20,7 @@ export const projectSummaries: ProjectSummary[] = [
     title: "Smartcool Monitoring",
     tags: ["Laravel", "Node.js", "React", "MQTT", "Docker", "Redis"],
     description:
-      "Full-stack IoT monitoring platform supporting 600+ connected devices and 500+ active users, rebuilt from a legacy PHP system with 98% CPU load reduction.",
+      "Full-stack IoT monitoring platform supporting 2000+ connected devices and 500+ active users, rebuilt from a legacy PHP system with 98% CPU load reduction.",
     image: {
       src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
       alt: "Smartcool Monitoring",
@@ -192,7 +192,7 @@ const projectDetails: Record<string, ProjectDetail> = {
     title: "Smartcool Monitoring",
     tags: ["Laravel", "Node.js", "React", "MQTT", "Docker", "Redis"],
     description:
-      "A full-stack IoT monitoring platform migrated from a legacy PHP dashboard to a modern React and Laravel architecture. The system supports 600+ connected devices across 5+ sensor metrics in real time, serves 500+ active users, and is powered by 7 Node.js microservices handling data pipelines, background jobs, and third-party integrations.",
+      "A full-stack IoT monitoring platform migrated from a legacy PHP dashboard to a modern React and Laravel architecture. The system supports 2000+ connected devices across 5+ sensor metrics in real time, serves 500+ active users, and is powered by 7 Node.js microservices handling data pipelines, background jobs, and third-party integrations.",
     heroImage: {
       src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
       alt: "Smartcool Monitoring Dashboard",
@@ -240,7 +240,7 @@ const projectDetails: Record<string, ProjectDetail> = {
         {
           title: "IoT Device Layer",
           description:
-            "600+ connected devices stream live telemetry across 5+ sensor metrics. Node.js microservices handle ingestion, processing pipelines, and real-time delivery to the front end.",
+            "2000+ connected devices stream live telemetry across 5+ sensor metrics. Node.js microservices handle ingestion, processing pipelines, and real-time delivery to the front end.",
         },
         {
           title: "Laravel Back End",

@@ -2,9 +2,9 @@ import type { Stat, ExperienceItem, EducationItem } from "@/types";
 
 export const personal = {
   name: "Ryan Faatih Firdaus",
-  title: "Software Engineer",
+  title: "Back-End & IoT Software Engineer",
   location: "Jakarta, Indonesia",
-  bio: "I build inventory management systems, workflow automation tools, SaaS applications, payment integrations, and real-time monitoring platforms that help businesses streamline operations and scale efficiently.",
+  bio: "I build back-end systems and real-time IoT platforms: APIs, data pipelines, device firmware, and the dashboards on top of them.",
 
   about: {
     heading: "Technical Expertise",
@@ -37,7 +37,7 @@ export const personal = {
     sourceCode: "https://github.com/ryanffirdaus",
   },
 
-  resumeHref: "https://drive.google.com/file/d/18uP_qgaPib3xd4HycIHB91V_AT3Klbno/view?usp=sharing",
+  resumeHref: "/files/CV.pdf",
   copyright: "© 2026 Ryan Faatih Firdaus. All rights reserved.",
 } as const;
 
@@ -49,15 +49,18 @@ export const experience: ExperienceItem[] = [
     location: "Indonesia",
     logo: "/images/companies/smartcool_logo.webp",
     description:
-      "Led full-stack modernization of a legacy IoT management platform and architected scalable back-end systems supporting 500+ active users.",
+      "Builds real-time IoT monitoring platforms, device firmware, and API integrations for large on-premise deployments.",
     highlights: [
-      "Migrated legacy PHP-based IoT system to React and Laravel, reducing CPU load by ~98%",
-      "Optimized database queries and implemented Redis caching, reducing memory usage by ~75%",
-      "Architected REST APIs, database schema, service layers, and application structure using Laravel and Node.js",
-      "Developed a real-time IoT monitoring system ingesting live sensor data from 600+ connected devices and processing live telemetry across 5+ sensor metrics",
-      "Built 7 Node.js microservices for data processing pipelines and background services",
-      "Developed and maintained React front-end with real-time dashboard components visualizing 5+ IoT metrics",
-      "Managed server infrastructure with Docker and Linux, streamlining deployments via containerization and automated pipelines",
+      "Built a real-time IoT monitoring platform ingesting live telemetry (5+ sensor metrics) from 2000+ devices over MQTT, serving 500+ active users",
+      "Redesigned the telemetry pipeline after hundreds of devices writing every MQTT reading to MySQL every 5 seconds saturated server CPU and memory: moved live data to Redis (latest value per device, refreshed every 15 seconds) and persisted to MySQL every 15 minutes, cutting database writes per device by 180x, CPU usage by ~98%, and memory usage by ~75%",
+      "Developed 3 IoT device firmware projects in C++ and improved several existing firmware, owning the full stack from device to back end to dashboard",
+      "Migrated a legacy PHP monitoring dashboard to a React front end and Laravel back end, improving maintainability",
+      "Building a Data Center Infrastructure Management (DCIM) platform in Go (in progress)",
+      "Built the API integration layer for a separate 1,000-device on-premise project, connecting field devices to the platform via REST APIs and webhooks",
+      "Designed and maintained public and internal REST APIs enabling interoperability between IoT devices, external platforms, and internal services",
+      "Developed 7 Node.js microservices for data processing pipelines, background jobs, and external system integrations, including a notification service that delivers alerts via webhooks and REST callbacks",
+      "Containerized and deployed services with Docker on Linux servers, using Nginx as a reverse proxy to route traffic to each service",
+      "Set up Grafana dashboards and alerts to monitor server health and notify the team of issues such as storage running full",
     ],
   },
   {
@@ -69,10 +72,9 @@ export const experience: ExperienceItem[] = [
     description:
       "Built a full-featured Inventory Management System from scratch using PHP, covering the end-to-end product lifecycle across 50+ SKUs.",
     highlights: [
-      "Implemented stock management module tracking real-time inventory with full incoming/outgoing transaction history",
-      "Developed a production module managing manufacturing workflow from raw materials to finished goods",
-      "Built a maintenance and return module with step-by-step progress tracking and personnel traceability across 50+ records",
-      "Designed and optimized the database schema to ensure data integrity and query performance across all modules",
+      "Built an inventory management system in PHP from scratch, with real-time stock tracking, full incoming/outgoing transaction history, and 50+ SKUs",
+      "Developed a production module covering the workflow from raw materials to finished goods, with automatic stock deduction at each stage",
+      "Designed the relational database schema to ensure data integrity and query performance across all modules",
     ],
   },
 ];
@@ -82,7 +84,7 @@ export const education: EducationItem[] = [
     institution: "Universitas Islam Negeri Syarif Hidayatullah Jakarta",
     degree: "Bachelor of Information Systems",
     field: "Information Systems",
-    period: "2021 — 2025",
+    period: "Sep 2021 — Dec 2025",
     location: "Jakarta, Indonesia",
     description: "GPA: 3.57 / 4.00",
   },

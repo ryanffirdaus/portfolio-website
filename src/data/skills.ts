@@ -2,6 +2,8 @@ import type { Skill } from "@/types";
 
 export const skills: Skill[] = [
   // Languages
+  { name: "Go", category: "Languages", icon: "go" },
+  { name: "C++", category: "Languages", icon: "cplusplus" },
   { name: "PHP", category: "Languages", icon: "php" },
   { name: "JavaScript", category: "Languages", icon: "javascript" },
   { name: "TypeScript", category: "Languages", icon: "typescript" },
@@ -21,6 +23,8 @@ export const skills: Skill[] = [
   { name: "Linux", category: "DevOps & Infrastructure", icon: "linux" },
   { name: "Redis", category: "DevOps & Infrastructure", icon: "redis" },
   { name: "MQTT", category: "DevOps & Infrastructure" },
+  { name: "Nginx", category: "DevOps & Infrastructure", icon: "nginx" },
+  { name: "Grafana", category: "DevOps & Infrastructure", icon: "grafana" },
   // Tools
   { name: "Git", category: "Tools", icon: "git" },
   { name: "Figma", category: "Tools", icon: "figma" },
