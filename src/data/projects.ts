@@ -11,8 +11,8 @@ export const projectSummaries: ProjectSummary[] = [
     description:
       "An open-source Android app that tells you before a bill is due. You choose your main currency from 31 currencies. Each bill is a coloured card in a wallet. The app counts loan payments, warns you when you go over your monthly budget, and has a home-screen widget. It has no account and no server, so your bills stay on your phone.",
     image: {
-      src: "/images/projects/b4due/b4due_cover.webp",
-      alt: "B4Due home, statistics, and dark-mode home screens",
+      src: "/images/projects/b4due/cover.webp",
+      alt: "B4Due home page, home-screen widget, and dark subscription list",
     },
   },
   {
@@ -53,25 +53,58 @@ const projectDetails: Record<string, ProjectDetail> = {
     downloadUrl: "https://github.com/ryanffirdaus/b-4-due/releases",
     platform: "mobile",
     heroImage: {
-      src: "/images/projects/b4due/b4due_cover.webp",
-      alt: "B4Due home, statistics, and dark-mode home screens",
+      src: "/images/projects/b4due/cover.webp",
+      alt: "B4Due home page, home-screen widget, and dark subscription list",
     },
     gallery: [
-      { src: "/images/projects/b4due/home_light.webp", alt: "Home" },
-      { src: "/images/projects/b4due/calendar.webp", alt: "Bill calendar" },
       {
-        src: "/images/projects/b4due/statistics.webp",
+        src: "/images/projects/b4due/home.webp",
+        alt: "Home with wallet cards and the monthly budget",
+      },
+      {
+        src: "/images/projects/b4due/widget.webp",
+        alt: "Home-screen widget",
+      },
+      {
+        src: "/images/projects/b4due/currency_setting.webp",
+        alt: "Main currency setting",
+      },
+      {
+        src: "/images/projects/b4due/currency_list.webp",
+        alt: "Currency list with 31 currencies",
+      },
+      {
+        src: "/images/projects/b4due/bill_form.webp",
+        alt: "Bill form",
+      },
+      {
+        src: "/images/projects/b4due/loan_detail.webp",
+        alt: "Instalment plan on the bill detail page",
+      },
+      {
+        src: "/images/projects/b4due/budget_sheet.webp",
+        alt: "Setting the monthly budget",
+      },
+      {
+        src: "/images/projects/b4due/budget_warning_dark.webp",
+        alt: "Over-budget warning in dark mode",
+      },
+      {
+        src: "/images/projects/b4due/bills_dark.webp",
+        alt: "Subscriptions in dark mode",
+      },
+      {
+        src: "/images/projects/b4due/calendar_day.webp",
+        alt: "Bill calendar with a day sheet",
+      },
+      {
+        src: "/images/projects/b4due/spending.webp",
         alt: "Spending statistics",
       },
       {
-        src: "/images/projects/b4due/bill_form_usd.webp",
-        alt: "Bill form in US dollars",
+        src: "/images/projects/b4due/reminder.webp",
+        alt: "Reminder with Paid and Remind me tomorrow actions",
       },
-      {
-        src: "/images/projects/b4due/notification.webp",
-        alt: "Notification actions",
-      },
-      { src: "/images/projects/b4due/home_dark.webp", alt: "Home dark mode" },
     ],
     challenge: [
       "A reminder app is only useful if each reminder comes on time. B4Due has no server, so the phone must schedule every reminder. The reminders must stay after the phone restarts. They must also get past the battery savers on Xiaomi, OPPO, vivo, and other phones. The Paid button on a reminder works when the app is closed. It must never record the same payment two times. People pay bills in many currencies, so the app also needs current exchange rates. It must get them without an account and continue to work offline.",
