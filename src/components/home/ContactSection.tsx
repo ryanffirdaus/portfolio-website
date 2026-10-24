@@ -1,3 +1,6 @@
+import Icon from "@/components/ui/Icon";
+import Section from "@/components/motion/Section";
+import { Reveal } from "@/components/motion/Reveal";
 import { button, container, eyebrow } from "@/components/ui/styles";
 import { personal } from "@/data/personal";
 import { socialLinks } from "@/data/social";
@@ -7,33 +10,30 @@ export default function ContactSection() {
   const profiles = socialLinks.filter(({ label }) => label !== "Email");
 
   return (
-    <section id="contact" className={`${container} scroll-mt-24 py-24`}>
-      <div className="rounded-card bg-panel px-6 py-16 text-center md:px-16 md:py-24">
-        <p className={eyebrow}>Contact</p>
-        <h2 className="mx-auto mt-4 max-w-200 text-heading font-bold text-white md:text-heading-lg">
-          {contact.heading}
-        </h2>
-        <p className="mx-auto mt-5 max-w-140 text-subheading text-fog">
-          {contact.body}
-        </p>
+    <Section id="contact" theme="light" className="pt-24 pb-40">
+      <div className={`${container} grid gap-10 md:grid-cols-12 md:gap-6`}>
+        <Reveal className="md:col-span-8">
+          <p className={`${eyebrow} text-graphite`}>Contact</p>
+          <h2 className="mt-4 text-[12vw] leading-[0.95] font-semibold tracking-[-0.05em] text-ink md:text-[6vw] xl:text-[88px]">
+            Have something that needs{" "}
+            <em className="serif-soft font-serif font-light text-neon-deep italic">building?</em>
+          </h2>
+        </Reveal>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a href={personal.social.email} className={button.primary}>
-            {contact.email}
-          </a>
-          {profiles.map(({ href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={button.outline}
-            >
-              {label}
+        <Reveal className="md:col-span-4 md:self-end">
+          <p className="text-body text-graphite md:text-subheading">{contact.body}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={personal.social.email} className={button.primary}>
+              Send an email <Icon name="arrow-right" size={14} />
             </a>
-          ))}
-        </div>
+            {profiles.map(({ href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={button.outlineInk}>
+                {label}
+              </a>
+            ))}
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

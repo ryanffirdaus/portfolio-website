@@ -1,87 +1,67 @@
 import Image from "next/image";
 import Link from "next/link";
-import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { button, container } from "@/components/ui/styles";
-import { getProjectDetail, projectSummaries } from "@/data/projects";
+import ProjectReel from "@/components/home/ProjectReel";
+import Section from "@/components/motion/Section";
+import { Reveal } from "@/components/motion/Reveal";
+import { container, eyebrow } from "@/components/ui/styles";
+import { reel } from "@/data/home";
+import { projectSummaries } from "@/data/projects";
 
 export default function ProjectsSection() {
   return (
-    <section id="work" className={`${container} scroll-mt-24 py-24`}>
-      <SectionHeading eyebrow="Selected work">
-        Recent projects
-      </SectionHeading>
+    <Section id="work" theme="dark" curve className="dot-grid">
+      <ProjectReel />
 
-      <div className="mt-16 space-y-24">
-        {projectSummaries.map(
-          ({ slug, title, tags, description, image }, idx) => {
-            const detail = getProjectDetail(slug);
-            const metrics = detail?.keyResults.slice(0, 3) ?? [];
-            const reversed = idx % 2 === 1;
+      {/* After the reel: every case study, one line each. */}
+      <div className={`${container} pt-12 pb-32`}>
+        <Reveal className="flex items-end justify-between gap-6 border-b border-steel pb-6">
+          <h2 className="text-[9vw] leading-none font-semibold tracking-[-0.05em] text-white md:text-[48px]">
+            All case studies
+          </h2>
+          <p className={`${eyebrow} hidden text-silver md:block`}>
+            {String(projectSummaries.length).padStart(2, "0")} projects
+          </p>
+        </Reveal>
 
+        <Reveal as="ol" stagger className="mt-4 space-y-2">
+          {projectSummaries.map(({ slug, title, tags, image }, i) => {
+            const tagline = reel.items.find((r) => r.slug === slug)?.tagline;
             return (
-              <article
-                key={slug}
-                className={`grid items-center gap-10 md:gap-16 ${
-                  reversed
-                    ? "md:grid-cols-[45fr_55fr]"
-                    : "md:grid-cols-[55fr_45fr]"
-                }`}
-              >
+              <li key={slug}>
                 <Link
                   href={`/projects/${slug}`}
-                  className={`vignette block overflow-hidden rounded-card bg-panel ${
-                    reversed ? "md:order-2" : ""
-                  }`}
+                  className="chamfer chamfer-frame group block bg-steel transition-colors duration-500 hover:bg-neon [--frame-cut:14px]"
                 >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    width={1200}
-                    height={800}
-                    sizes="(min-width: 768px) 55vw, 100vw"
-                    className="aspect-4/3 w-full object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
-                  />
+                  <span className="chamfer grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 bg-ink px-5 py-5 transition-colors duration-500 group-hover:bg-panel md:grid-cols-[4rem_1.1fr_1.4fr_auto] md:px-8 md:py-7">
+                    <span className="font-mono text-body-sm text-neon">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-[24px] leading-none font-semibold tracking-[-0.03em] text-white md:text-[36px]">
+                      {title}
+                    </span>
+                    <span className="col-span-3 col-start-2 row-start-2 text-body-sm text-fog md:col-span-1 md:col-start-3 md:row-start-1">
+                      {tagline}
+                      <span className="mt-2 block font-mono text-[11px] tracking-[0.04em] text-muted uppercase">
+                        {tags.slice(0, 4).join(" / ")}
+                      </span>
+                    </span>
+                    <span className="col-start-3 row-start-1 flex items-center gap-4 md:col-start-4">
+                      {/* The cover opens on hover. */}
+                      <span className="chamfer chamfer-sm relative hidden h-16 w-0 overflow-hidden transition-[width] duration-700 ease-out-expo group-hover:w-28 md:block">
+                        <Image src={image.src} alt="" fill sizes="112px" className="object-cover object-top" />
+                      </span>
+                      <Icon
+                        name="arrow-up-right"
+                        size={22}
+                        className="text-silver transition-[color,transform] duration-500 ease-out-expo group-hover:rotate-45 group-hover:text-neon"
+                      />
+                    </span>
+                  </span>
                 </Link>
-
-                <div className={reversed ? "md:order-1" : ""}>
-                  <div className="flex flex-wrap gap-2">
-                    {detail?.liveUrl && <Badge tone="live">Live demo</Badge>}
-                    {detail?.sourceUrl && <Badge tone="info">Open source</Badge>}
-                    {tags.map((tag) => (
-                      <Badge key={tag}>{tag}</Badge>
-                    ))}
-                  </div>
-                  <h3 className="mt-6 text-heading font-bold text-white">
-                    {title}
-                  </h3>
-                  <p className="mt-4 text-body text-fog">{description}</p>
-
-                  {metrics.length > 0 && (
-                    <dl className="mt-8 grid grid-cols-3 gap-6">
-                      {metrics.map(({ prefix, target, suffix, label }) => (
-                        <div key={label} className="flex flex-col-reverse">
-                          <dt className="mt-1 text-body-sm text-ash">{label}</dt>
-                          <dd className="text-heading-sm font-bold text-white">
-                            {prefix}
-                            {target}
-                            {suffix}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
-
-                  <Link href={`/projects/${slug}`} className={`${button.ghost} mt-8`}>
-                    Read the case study <Icon name="arrow-right" />
-                  </Link>
-                </div>
-              </article>
+              </li>
             );
-          },
-        )}
+          })}
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

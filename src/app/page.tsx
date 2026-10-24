@@ -1,6 +1,8 @@
 import HeroSection from "@/components/home/HeroSection";
+import StackSection from "@/components/home/StackSection";
 import ProjectsSection from "@/components/home/ProjectsSection";
-import StackRail from "@/components/home/StackRail";
+import ApproachSection from "@/components/home/ApproachSection";
+import ServicesSection from "@/components/home/ServicesSection";
 import ExperienceSection from "@/components/home/ExperienceSection";
 import ContactSection from "@/components/home/ContactSection";
 import { personal } from "@/data/personal";
@@ -33,8 +35,10 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
       <HeroSection />
-      <StackRail />
       <ProjectsSection />
+      <StackSection />
+      <ApproachSection />
+      <ServicesSection />
       <ExperienceSection />
       <ContactSection />
     </main>
