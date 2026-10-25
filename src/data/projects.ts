@@ -22,7 +22,7 @@ export const projectSummaries: ProjectSummary[] = [
     description:
       "Full-stack IoT monitoring platform supporting 2000+ connected devices and 500+ active users, rebuilt from a legacy PHP system with 98% CPU load reduction.",
     image: {
-      src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
+      src: "/images/projects/smartcool-monitoring/homepage_monitoring_1.webp",
       alt: "Smartcool Monitoring",
     },
   },
@@ -194,7 +194,7 @@ const projectDetails: Record<string, ProjectDetail> = {
     description:
       "A full-stack IoT monitoring platform migrated from a legacy PHP dashboard to a modern React and Laravel architecture. The system supports 2000+ connected devices across 5+ sensor metrics in real time, serves 500+ active users, and is powered by 7 Node.js microservices handling data pipelines, background jobs, and third-party integrations.",
     heroImage: {
-      src: "/images/projects/smartcool-monitoring/smartcool_thumbnail.webp",
+      src: "/images/projects/smartcool-monitoring/homepage_monitoring_1.webp",
       alt: "Smartcool Monitoring Dashboard",
     },
     gallery: [
